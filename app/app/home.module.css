@@ -1,0 +1,26 @@
+.welcome {
+  margin-top: 76px;
+
+  margin-right: 213px;
+  color: var(--white, #f5f1e9);
+  font-family: Helvetica;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.titleformat {
+  margin-left: 32px;
+}
+.userName {
+  margin-top: 103px;
+  margin-bottom: 235px;
+  margin-right: 204px;
+  color: var(--white, #f5f1e9);
+  font-family: Helvetica;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
