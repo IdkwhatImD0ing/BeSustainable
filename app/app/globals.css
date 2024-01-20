@@ -1,5 +1,6 @@
 :root {
-  --max-width: 1100px;
+  --max-width: 390px;
+  --max-height: 844px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Helvetica",
     "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace",
@@ -103,5 +104,12 @@ a {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: white;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .container {
+    margin: 0 auto;
+    width: 90%; /* Adjust this value as needed */
   }
 }
