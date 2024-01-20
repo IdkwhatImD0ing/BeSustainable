@@ -1,14 +1,14 @@
-const User = require('../schemas/userModel.js')
-const Post = require('../schemas/postModel.js');
+const User = require("../schemas/userModel.js");
+const Post = require("../schemas/postModel.js");
 
 async function createPost(userId, imageLink, caption) {
   try {
-    const newPost = new Post({imageLink, caption});
+    const newPost = new Post({ imageLink, caption });
     await newPost.save();
 
     const user = await User.findById(userId);
     if (!user) {
-      throw new Error('User not found');
+      throw new Error("User not found");
     }
 
     newPost.nextPost = user.headPost;
@@ -19,7 +19,7 @@ async function createPost(userId, imageLink, caption) {
 
     return newPost;
   } catch (error) {
-    console.error('Error creating post for user: ', error);
+    console.error("Error creating post for user: ", error);
     throw error;
   }
 }
@@ -35,8 +35,7 @@ async function getPosts(userId) {
     let currentPostId = user.headPost;
     while (currentPostId) {
       const post = await Post.findById(currentPostId);
-      if (!post)
-        break;
+      if (!post) break;
 
       posts.push(post);
       currentPostId = post.nextPost;
@@ -44,12 +43,12 @@ async function getPosts(userId) {
 
     return posts;
   } catch (error) {
-    consoler.error('Error retrieving posts: ', error);
+    consoler.error("Error retrieving posts: ", error);
     throw error;
   }
 }
 
 module.exports = {
   createPost,
-  getPosts
+  getPosts,
 };

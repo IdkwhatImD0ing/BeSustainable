@@ -3,9 +3,9 @@ const User = require("../schemas/userModel.js");
 async function createUser(username, email, password) {
   try {
     const newUser = new User({
-      username : username,
-      email : email,
-      password : password,
+      username: username,
+      email: email,
+      password: password,
     });
 
     await newUser.save();
@@ -21,7 +21,7 @@ async function createUser(username, email, password) {
 
 async function getUserById(userId) {
   try {
-    const user = await User.findById({id : userId});
+    const user = await User.findById({ id: userId });
     return user;
   } catch (error) {
     console.error("Error finding user: ", error);
@@ -31,10 +31,10 @@ async function getUserById(userId) {
 
 async function getUserByEmail(email) {
   try {
-    const user = await User.findOne({email : email});
+    const user = await User.findOne({ email: email });
     return user;
   } catch (error) {
-    consoler.error('Error finding user by email: ', error);
+    consoler.error("Error finding user by email: ", error);
     throw error;
   }
 }
@@ -42,5 +42,5 @@ async function getUserByEmail(email) {
 module.exports = {
   createUser,
   getUserById,
-  getUserByEmail
-}
+  getUserByEmail,
+};
