@@ -1,5 +1,5 @@
-import RootLayout from "./layout";
-import styles from "./home.module.css";
+import RootLayout from './layout'
+import styles from './page.module.css'
 
 export default function Home() {
   return (
@@ -14,5 +14,5 @@ export default function Home() {
         </RootLayout>
       </div>
     </main>
-  );
+  )
 }
