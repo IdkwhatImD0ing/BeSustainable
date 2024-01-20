@@ -1,8 +1,9 @@
-const User = require('../schemas/userModel.js')
-const Post = require('../schemas/postModel.js');
+const User = require('../models/userModel.js')
+const Post = require('../models/postModel.js');
 
 async function createPost(userId, imageLink, caption) {
     try {
+        await connectDB();
         const newPost = new Post({imageLink, caption});
         await newPost.save();
 
@@ -26,6 +27,7 @@ async function createPost(userId, imageLink, caption) {
 
 async function getPosts(userId) {
     try {
+        await connectDB();
         const user = await User.findById(userId);
         if(!user || !user.headPost) {
             throw new Error("User not found");

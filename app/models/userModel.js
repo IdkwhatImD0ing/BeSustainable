@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Post = require('../schemas/postModel.js')
 
 const userSchema = new mongoose.schema({
     id: {

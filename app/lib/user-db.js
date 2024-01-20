@@ -1,7 +1,9 @@
-const User = require("../schemas/userModel.js");
+const User = require("../models/userModel.js")
+const connectDB = require("./connect-db");
 
 async function createUser(username, email, password) {
     try {
+        await connectDB();
         const newUser = new User({
             username: username,
             email: email,
@@ -21,6 +23,8 @@ async function createUser(username, email, password) {
 
 async function getUserById(userId) {
     try {
+        await connectDB();
+
         const user = await User.findById({id: userId});
         return user;
     } catch(error) {
@@ -31,6 +35,7 @@ async function getUserById(userId) {
 
 async function getUserByEmail(email) {
     try {
+        await connectDB();
         const user = await User.findOne({email: email});
         return user;
     } catch (error) {
