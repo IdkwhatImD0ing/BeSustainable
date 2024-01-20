@@ -1,20 +1,24 @@
-import { Inter } from "next/font/google";
-import "./globals.css";
-import BottomNav from "./components/BottomNavbar.js";
+import {Inter} from 'next/font/google'
+import './globals.css'
+import BottomNav from './components/BottomNavbar.js'
+import {UserProvider} from '@auth0/nextjs-auth0/client'
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({subsets: ['latin']})
 
 export const metadata = {
-  title: "BeSustainable",
-  description: "BeReal but for food",
-};
+  title: 'BeSustainable',
+  description: 'BeReal but for food',
+}
 
-export default function RootLayout({ children }) {
+export default function RootLayout({children}) {
   return (
-    <>
-      <BottomNav />
-
-      <main>{children}</main>
-    </>
-  );
+    <html lang="en">
+      <body>
+        <UserProvider>
+          <BottomNav />
+          {children}
+        </UserProvider>
+      </body>
+    </html>
+  )
 }
