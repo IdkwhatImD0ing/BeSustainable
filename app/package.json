@@ -19,6 +19,7 @@
     "@mui/icons-material": "^5.15.5",
     "@mui/material": "^5.15.5",
     "@typegoose/typegoose": "^12.1.0",
+    "dotenv": "^16.3.2",
     "axios": "^1.6.5",
     "google-gax": "^4.1.0",
     "mongodb": "^6.3.0",
@@ -30,11 +31,7 @@
     "react-dom": "^18"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.2.0",
-    "@testing-library/react": "^14.1.2",
     "eslint": "^8",
-    "test": "jest",
-    "test:watch": "jest --watch",
     "eslint-config-next": "14.1.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0"
