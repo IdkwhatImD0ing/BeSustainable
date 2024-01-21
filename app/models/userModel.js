@@ -1,30 +1,20 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
+const {v4: uuidv4} = require('uuid')
 
 const userSchema = new mongoose.Schema({
-    
-    username: {
+    _id: {
         type: String,
-        required: true,
-        unique: true
+        default: uuidv4,
     },
-    email: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
-    scores: {
-        type: [Number],
-        default: [0, 0, 0, 0, 0, 0, 0]
-    },
-    headPost: {
-        type: mongoose.Schema.Types.ObjectId,
-        default: null
-    }
-});
+  scores: {
+    type: [Number],
+    default: [0, 0, 0, 0, 0, 0, 0],
+  },
+  headPost: {
+    type: mongoose.Schema.Types.ObjectId,
+    default: null,
+  },
+})
 /*
 function generateId() {
     return Math.floor(100000000 + Math.random() * 900000000).toString();
@@ -51,6 +41,6 @@ userSchema.pre('save', async function(next) {
     next();
 });*/
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema)
 
-module.exports = User;
+module.exports = User
