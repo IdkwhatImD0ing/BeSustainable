@@ -6,9 +6,10 @@ import {LinearProgress} from '@mui/material'
 import {useState, useEffect} from 'react'
 import {useRouter} from 'next/navigation'
 import {useUser} from '@auth0/nextjs-auth0/client'
+import Error from './error'
 
 export default function Results() {
-  const [ingredients, setIngredients] = useState([])
+  const [ingredients, setIngredients] = useState()
   const [score, setScore] = useState(0)
   const [image, setImage] = useState('')
   const [mode, setMode] = useState('')
@@ -16,11 +17,28 @@ export default function Results() {
   const {user} = useUser()
 
   useEffect(() => {
+    if (!user) {
+      return
+    }
+    const score = localStorage.getItem('score')
     setIngredients(localStorage.getItem('ingredients'))
-    setScore(localStorage.getItem('score'))
+    setScore(score)
     setImage(localStorage.getItem('image'))
     setMode(localStorage.getItem('mode'))
-  }, [])
+    // convert to number
+    fetch('/api/scores', {
+      method: 'POST',
+      body: JSON.stringify({
+        userId: user.sid,
+        increase: Number(score),
+      }),
+    })
+  }, [user])
+
+  // If ingredients list is empty, but not undefined
+  if (ingredients && ingredients.length === 0) {
+    return <Error />
+  }
 
   return (
     <Stack direction="column">

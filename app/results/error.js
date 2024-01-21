@@ -1,25 +1,27 @@
-import { Stack } from "@mui/material";
-import Item from "@mui/material/ListItem";
-import Button from "@mui/material/Button";
+'use client'
+
+import {Stack} from '@mui/material'
+import Item from '@mui/material/ListItem'
+import Button from '@mui/material/Button'
 
 export default function Error() {
   return (
     <Stack
       direction="column"
       sx={{
-        position: "relative",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        position: 'relative',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       <Item
         sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "10%",
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '10%',
         }}
       >
         <svg
@@ -49,11 +51,11 @@ export default function Error() {
       </Item>
       <Item
         sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "-27px",
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '-27px',
         }}
       >
         <svg
@@ -71,54 +73,54 @@ export default function Error() {
       </Item>
       <Item
         sx={{
-          fontFamily: "Helvetica",
-          fontSize: "24px",
-          fontWeight: "400",
-          marginTop: "10%",
-          color: "rgba(26, 28, 28, 0.5)",
+          fontFamily: 'Helvetica',
+          fontSize: '24px',
+          fontWeight: '400',
+          marginTop: '10%',
+          color: 'rgba(26, 28, 28, 0.5)',
         }}
       >
         Hello lovely human,
       </Item>
       <Item
         sx={{
-          fontFamily: "Helvetica",
-          fontSize: "32px",
-          fontWeight: "700",
-          color: "rgba(26, 28, 28, 1)",
+          fontFamily: 'Helvetica',
+          fontSize: '32px',
+          fontWeight: '700',
+          color: 'rgba(26, 28, 28, 1)',
         }}
       >
         There was an error.
       </Item>
       <Item
         sx={{
-          fontFamily: "Helvetica",
-          fontSize: "32px",
-          marginTop: "-5%",
-          fontWeight: "700",
-          color: "rgba(26, 28, 28, 1)",
+          fontFamily: 'Helvetica',
+          fontSize: '32px',
+          marginTop: '-5%',
+          fontWeight: '700',
+          color: 'rgba(26, 28, 28, 1)',
         }}
       >
         Please try again.
       </Item>
       <Item
         sx={{
-          marginTop: "50%",
+          marginTop: '50%',
 
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <img
           src="/plate.png"
           style={{
-            position: "absolute",
+            position: 'absolute',
 
-            width: "152px",
-            height: "180px",
-            zIndex: "1",
+            width: '152px',
+            height: '180px',
+            zIndex: '1',
           }}
           alt="Plate"
         />
@@ -126,19 +128,19 @@ export default function Error() {
       <Button
         variant="outlined"
         sx={{
-          ontFamily: "Helvetica",
-          fontSize: "20px",
-          fontWeight: "700",
-          color: "rgba(26, 28, 28, 1)",
-          marginTop: "50%",
-          width: "304px",
+          ontFamily: 'Helvetica',
+          fontSize: '20px',
+          fontWeight: '700',
+          color: 'rgba(26, 28, 28, 1)',
+          marginTop: '50%',
+          width: '304px',
 
-          height: "48px",
-          color: "rgba(26, 28, 28, 1)",
+          height: '48px',
+          color: 'rgba(26, 28, 28, 1)',
         }}
       >
         Back
       </Button>
     </Stack>
-  );
+  )
 }

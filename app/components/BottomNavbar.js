@@ -15,14 +15,15 @@ const BottomNav = () => {
       // onChange={(event, newValue) => {
       //   setValue(newValue);
       // }}
-      sx={{}}
-      style={{
+
+      sx={{
         position: 'fixed',
         bottom: 0,
         width: '100%',
         marginBottom: '4%',
+        zIndex: '100',
       }}
-      color="rgba(96, 143, 69, 1)"
+      color="rgba(96, 143, 69, 0)"
     >
       <Link href="/home">
         <BottomNavigationAction
@@ -46,28 +47,6 @@ const BottomNav = () => {
         />
       </Link>
     </BottomNavigation>
-
-    // <BottomNavigation
-    //   // showLabels
-    //   //value={value}
-    //   // onChange={(event, newValue) => {
-    //   //   setValue(newValue);
-    //   // }}
-    //   style={{ position: "fixed", bottom: 0, width: "100%" }}
-    // >
-    //   <nav className={styles.navbar}>
-    //     <Link href="/">
-    //       <BottomNavigationAction icon={<HomeIcon />} />
-    //     </Link>
-    //     <Link href="/camera">
-    //       <BottomNavigationAction icon={<PhotoCamera />} />
-    //     </Link>
-    //     <Link href="/profile">
-    //       {" "}
-    //       <BottomNavigationAction icon={<AccountCircleIcon />} />
-    //     </Link>
-    //   </nav>
-    // </BottomNavigation>
   )
 }
 

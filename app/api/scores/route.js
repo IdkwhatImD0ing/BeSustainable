@@ -5,9 +5,9 @@ export async function POST(request) {
   try {
     // Parse the request body
     const body = await request.json()
-    const {id, increase} = body
+    const {userId, increase} = body
 
-    if (!id || day === undefined || increase === undefined) {
+    if (!userId || increase === undefined) {
       return NextResponse.json(
         {error: 'Missing required fields'},
         {
@@ -17,7 +17,7 @@ export async function POST(request) {
     }
 
     // Call your helper function to update the user's score
-    const updatedUser = await updateScore(id, increase)
+    const updatedUser = await updateScore(userId, increase)
 
     // Return the updated user in the response
     return NextResponse.json(updatedUser, {
