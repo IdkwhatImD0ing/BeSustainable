@@ -1,23 +1,34 @@
-import { getSession } from "@auth0/nextjs-auth0";
-import PersonIcon from "@mui/icons-material/Person";
-import { Box, Stack } from "@mui/material";
-import Container from "@mui/material/Container";
-import Item from "@mui/material/ListItem";
+'use client'
 
-import PostBlock from "./components/PostBlock";
-import Tree from "./components/Tree";
-import styles from "./home.module.css";
+import {useState, useEffect} from 'react'
+import {Box, Stack} from '@mui/material'
+import Item from '@mui/material/ListItem'
+import PostBlock from '../components/PostBlock'
+import {useUser} from '@auth0/nextjs-auth0/client'
 
-export default async function Home() {
-  const { user } = await getSession();
-  console.log(user);
+export default function Home() {
+  const {user} = useUser()
+  const [posts, setPosts] = useState([])
 
-  const posts = [];
+  useEffect(() => {
+    console.log('user', user)
+    if (!user) return
+    const fetchData = async () => {
+      await fetch('/api/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({userId: user.sid}),
+      })
 
-  const defaultPost = {
-    imageUrl: "", // Path to a default image or base64 encoded string
-    caption: "No posts yet!",
-  };
+      const data = await fetch('/api/post?userId=' + user.sid)
+      const posts = await data.json()
+      setPosts(posts)
+    }
+
+    fetchData()
+  }, [user])
 
   const icon = () => {
     return (
@@ -33,12 +44,12 @@ export default async function Home() {
           fill="#3A4320"
         />
       </svg>
-    );
-  };
+    )
+  }
 
   return (
     <Stack direction="column">
-      <Item sx={{ marginTop: "22px", marginLeft: "5%" }}>
+      <Item sx={{marginTop: '22px', marginLeft: '5%'}}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="22"
@@ -46,7 +57,7 @@ export default async function Home() {
           viewBox="0 0 22 22"
           fill="none"
         >
-          <g clip-path="url(#clip0_49_254)">
+          <g clipPath="url(#clip0_49_254)">
             <path
               d="M6.46868 2.83788C6.60976 2.71905 6.7847 2.64772 6.96864 2.63402C7.15258 2.62031 7.33616 2.66494 7.49329 2.76156C10.525 4.62743 12.1865 6.98806 13.0725 9.58642C13.2918 10.2294 13.4629 10.8847 13.5953 11.5479C14.498 10.0303 15.9402 8.82674 18.1122 7.95828C18.2653 7.89712 18.4326 7.88037 18.5949 7.90995C18.7571 7.93953 18.9077 8.01424 19.0294 8.12551C19.1511 8.23678 19.239 8.38011 19.283 8.53905C19.327 8.69799 19.3252 8.86611 19.278 9.02412L19.1192 9.55396C17.9262 13.5261 17.5604 14.7428 17.5604 17.5447C17.5604 17.7773 17.468 18.0005 17.3035 18.165C17.139 18.3295 16.9158 18.4219 16.6832 18.4219C16.4505 18.4219 16.2274 18.3295 16.0629 18.165C15.8984 18.0005 15.8059 17.7773 15.8059 17.5447C15.8059 14.8647 16.1393 13.4217 17.0077 10.49C16.0235 11.1426 15.3752 11.9006 14.9401 12.7401C14.269 14.0331 14.0515 15.6191 14.0515 17.5447C14.0515 17.7773 13.9591 18.0005 13.7945 18.165C13.63 18.3295 13.4069 18.4219 13.1742 18.4219C12.9416 18.4219 12.7185 18.3295 12.5539 18.165C12.3894 18.0005 12.297 17.7773 12.297 17.5447C12.297 14.92 12.183 12.4155 11.4119 10.1522C10.8943 8.6355 10.0767 7.21263 8.7644 5.93977C9.65654 9.32588 9.66531 12.5927 9.66531 17.321V17.5447C9.66531 17.7773 9.57289 18.0005 9.40838 18.165C9.24387 18.3295 9.02074 18.4219 8.78808 18.4219C8.55543 18.4219 8.3323 18.3295 8.16778 18.165C8.00327 18.0005 7.91085 17.7773 7.91085 17.5447C7.91085 15.5358 7.90208 13.7103 7.40469 12.1672C7.11871 11.2786 6.66781 10.483 5.9283 9.82152C6.73536 12.5874 7.03362 14.6349 7.03362 17.5447C7.03362 17.7773 6.94119 18.0005 6.77668 18.165C6.61217 18.3295 6.38904 18.4219 6.15639 18.4219C5.92373 18.4219 5.7006 18.3295 5.53609 18.165C5.37158 18.0005 5.27915 17.7773 5.27915 17.5447C5.27915 14.155 4.8651 12.0576 3.56943 8.17232C3.5167 8.01366 3.51041 7.84323 3.5513 7.68111C3.59219 7.51899 3.67857 7.37193 3.80024 7.25726C3.92192 7.14259 4.07384 7.06508 4.23809 7.03386C4.40235 7.00264 4.57211 7.01901 4.72737 7.08105C5.95111 7.56967 6.88098 8.22233 7.58276 8.99341C7.34792 7.22339 6.88987 5.49022 6.21955 3.83529C6.15086 3.66397 6.13796 3.47534 6.18269 3.29626C6.22742 3.11718 6.3275 2.95678 6.46868 2.83788Z"
               fill="#F0C571"
@@ -64,7 +75,7 @@ export default async function Home() {
           </defs>
         </svg>
       </Item>
-      <Item sx={{ marginTop: "-22px", marginLeft: "5%" }}>
+      <Item sx={{marginTop: '-22px', marginLeft: '5%'}}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="27"
@@ -81,83 +92,74 @@ export default async function Home() {
       <Stack direction="column">
         <Item
           sx={{
-            fontFamily: "Helvetica",
-            fontSize: "20px",
-            fontWeight: "400",
-            color: " rgba(26, 28, 28, 1)",
-            marginTop: "10%",
-            marginLeft: "5%",
+            fontFamily: 'Helvetica',
+            fontSize: '20px',
+            fontWeight: '400',
+            color: ' rgba(26, 28, 28, 1)',
+            marginTop: '10%',
+            marginLeft: '5%',
           }}
         >
           Welcome home,
         </Item>
         <Item
           sx={{
-            fontFamily: "Helvetica",
-            fontSize: "32px",
-            fontWeight: "700",
-            color: " rgba(26, 28, 28, 1)",
-            marginLeft: "5%",
+            fontFamily: 'Helvetica',
+            fontSize: '32px',
+            fontWeight: '700',
+            color: ' rgba(26, 28, 28, 1)',
+            marginLeft: '5%',
           }}
         >
-          {user.name}
+          {user ? user.name : ''}
         </Item>
         <Item
           sx={{
-            position: "relative",
-            top: "-95px", // Adjust this value to move the icon up
-            right: "40px",
-            justifyContent: "flex-end",
+            position: 'relative',
+            top: '-95px', // Adjust this value to move the icon up
+            right: '40px',
+            justifyContent: 'flex-end',
           }}
         >
-          {" "}
+          {' '}
           {icon()}
         </Item>
         <Item>
           <img
             src="/cart.png"
             style={{
-              position: "absolute",
-              marginTop: "10%",
-              width: "221px",
-              height: "166px",
-              zIndex: "1",
-              right: "5px",
+              position: 'absolute',
+              marginTop: '10%',
+              width: '221px',
+              height: '166px',
+              zIndex: '1',
+              right: '5px',
             }}
             alt="Cart"
           />
         </Item>
         <Item
           sx={{
-            fontFamily: "Helvetica",
-            fontSize: "32px",
-            fontWeight: "700",
-            color: "black",
-            marginTop: "18%",
-            marginLeft: "5%",
+            fontFamily: 'Helvetica',
+            fontSize: '32px',
+            fontWeight: '700',
+            color: 'black',
+            marginTop: '18%',
+            marginLeft: '5%',
           }}
         >
           Time to Feast
         </Item>
 
-        {posts.length === 0 ? (
-          // Render the default post if there are no posts
+        {posts.map((post, index) => (
           <PostBlock
-            imageUrl={defaultPost.imageUrl}
-            caption={defaultPost.caption}
+            key={index}
+            imageUrl={post.imageUrl}
+            caption={post.caption}
           />
-        ) : (
-          // Otherwise, map over the posts and render them
-          posts.map((post, index) => (
-            <PostBlock
-              key={index}
-              imageUrl={post.imageUrl}
-              caption={post.caption}
-            />
-          ))
-        )}
+        ))}
       </Stack>
-      <Item sx={{ zIndex: "-1", marginTop: "-50%" }}>
+      <Item sx={{zIndex: '-1', marginTop: '-50%'}}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="390"
@@ -173,14 +175,14 @@ export default async function Home() {
       </Item>
       <Stack
         sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <Box>ListItem</Box>
       </Stack>
     </Stack>
-  );
+  )
 }

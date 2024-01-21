@@ -17,11 +17,11 @@ export async function POST(request) {
     }
 
     // Call your helper function to create a user
-    const newUser = await createUser(userId)
+    const {newUser, code} = await createUser(userId)
 
     // Return the new user in the response
     return NextResponse.json(newUser, {
-      status: 201, // 201 for Created
+      status: code,
     })
   } catch (error) {
     console.error('Error in POST request: ', error)

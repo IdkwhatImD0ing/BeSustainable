@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
       status: 200,
     });
   } catch (error) {
-    console.error('Error in GET request: ', error);
+    console.log('Error in GET request: ', error);
     return NextResponse.json({ error: error.message }, {
       status: 500,
     });
@@ -29,6 +29,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+
     // Parse the request body
     const body = await request.json();
     const { userId, imageLink, caption } = body;
@@ -53,3 +54,4 @@ export async function POST(request: NextRequest) {
     });
   }
 }
+

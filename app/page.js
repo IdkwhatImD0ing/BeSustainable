@@ -2,6 +2,9 @@
 import { Stack, Box } from "@mui/material";
 import Item from "@mui/material/ListItem";
 import Button from "@mui/material/Button";
+'use client'
+import {Stack, Button} from '@mui/material'
+import Item from '@mui/material/ListItem'
 
 export default function Landing() {
   return (
@@ -11,19 +14,19 @@ export default function Landing() {
       width="100%"
       alignItems="center"
       sx={{
-        position: "relative",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        position: 'relative',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       <Item
         sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "25%",
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '25%',
         }}
       >
         <svg
@@ -33,7 +36,7 @@ export default function Landing() {
           viewBox="0 0 41 40"
           fill="none"
         >
-          <g clip-path="url(#clip0_49_432)">
+          <g clipPath="url(#clip0_49_432)">
             <path
               d="M10.9964 5.36035C11.2628 5.1359 11.5933 5.00116 11.9407 4.97528C12.2882 4.9494 12.6349 5.0337 12.9317 5.21619C18.6583 8.74062 21.7966 13.1996 23.4702 18.1076C23.8845 19.3222 24.2076 20.56 24.4578 21.8126C26.1628 18.946 28.8869 16.6726 32.9896 15.0322C33.2789 14.9167 33.5949 14.8851 33.9014 14.9409C34.2078 14.9968 34.4923 15.1379 34.7222 15.3481C34.9521 15.5583 35.1181 15.829 35.2012 16.1292C35.2842 16.4295 35.281 16.747 35.1918 17.0455L34.8919 18.0463C32.6384 25.5492 31.9474 27.8474 31.9474 33.1399C31.9474 33.5793 31.7728 34.0008 31.4621 34.3115C31.1513 34.6223 30.7299 34.7968 30.2904 34.7968C29.8509 34.7968 29.4295 34.6223 29.1187 34.3115C28.808 34.0008 28.6334 33.5793 28.6334 33.1399C28.6334 28.0777 29.2631 25.352 30.9035 19.8143C29.0443 21.0471 27.8198 22.4788 26.9979 24.0645C25.7303 26.5069 25.3194 29.5028 25.3194 33.1399C25.3194 33.5793 25.1448 34.0008 24.8341 34.3115C24.5233 34.6223 24.1019 34.7968 23.6624 34.7968C23.223 34.7968 22.8015 34.6223 22.4907 34.3115C22.18 34.0008 22.0054 33.5793 22.0054 33.1399C22.0054 28.1821 21.79 23.4514 20.3335 19.1764C19.3559 16.3114 17.8116 13.6238 15.3327 11.2195C17.0179 17.6155 17.0344 23.7861 17.0344 32.7173V33.1399C17.0344 33.5793 16.8599 34.0008 16.5491 34.3115C16.2384 34.6223 15.8169 34.7968 15.3774 34.7968C14.938 34.7968 14.5165 34.6223 14.2058 34.3115C13.895 34.0008 13.7205 33.5793 13.7205 33.1399C13.7205 29.3453 13.7039 25.8971 12.7644 22.9825C12.2242 21.3039 11.3725 19.8011 9.97565 18.5517C11.5001 23.7762 12.0635 27.6436 12.0635 33.1399C12.0635 33.5793 11.8889 34.0008 11.5781 34.3115C11.2674 34.6223 10.8459 34.7968 10.4065 34.7968C9.967 34.7968 9.54554 34.6223 9.23479 34.3115C8.92405 34.0008 8.74947 33.5793 8.74947 33.1399C8.74947 26.7372 7.96737 22.7754 5.51999 15.4365C5.42039 15.1368 5.40851 14.8149 5.48575 14.5087C5.56299 14.2025 5.72614 13.9247 5.95598 13.7081C6.18581 13.4915 6.47276 13.3451 6.78303 13.2861C7.09329 13.2271 7.41395 13.258 7.70722 13.3752C10.0187 14.2982 11.7751 15.531 13.1007 16.9875C12.6571 13.6441 11.7919 10.3703 10.5258 7.24435C10.396 6.92074 10.3717 6.56445 10.4562 6.22619C10.5406 5.88793 10.7297 5.58494 10.9964 5.36035Z"
               fill="#F0C571"
@@ -53,11 +56,11 @@ export default function Landing() {
       </Item>
       <Item
         sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "-22px",
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '-22px',
         }}
       >
         <svg
@@ -75,59 +78,59 @@ export default function Landing() {
       </Item>
       <Item
         sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          fontFamily: "Helvetica",
-          fontSize: "36px",
-          fontWeight: "700",
-          color: "rgba(63, 170, 114, 1)",
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontFamily: 'Helvetica',
+          fontSize: '36px',
+          fontWeight: '700',
+          color: 'rgba(63, 170, 114, 1)',
         }}
       >
         BeSustainable
       </Item>
       <Item
         sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          fontFamily: "Helvetica",
-          fontSize: "20px",
-          fontWeight: "400",
-          color: "rgba(63, 170, 114, 1)",
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontFamily: 'Helvetica',
+          fontSize: '20px',
+          fontWeight: '400',
+          color: 'rgba(63, 170, 114, 1)',
         }}
       >
         Making sustainable food
       </Item>
       <Item
         sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          fontFamily: "Helvetica",
-          fontSize: "20px",
-          fontWeight: "400",
-          color: "rgba(63, 170, 114, 1)",
-          marginTop: "-10px",
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontFamily: 'Helvetica',
+          fontSize: '20px',
+          fontWeight: '400',
+          color: 'rgba(63, 170, 114, 1)',
+          marginTop: '-10px',
         }}
       >
         choices one step at a time.
       </Item>
       <Item
         sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          fontFamily: "Helvetica",
-          fontSize: "20px",
-          fontWeight: "400",
-          color: "rgba(63, 170, 114, 1)",
-          marginTop: "55%",
-          zIndex: "-100",
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontFamily: 'Helvetica',
+          fontSize: '20px',
+          fontWeight: '400',
+          color: 'rgba(63, 170, 114, 1)',
+          marginTop: '55%',
+          zIndex: '-100',
         }}
       >
         <svg
@@ -149,22 +152,22 @@ export default function Landing() {
           <img
             src="/woman.png"
             style={{
-              position: "absolute",
-              top: "-370px", // Adjust these values to position the image
-              left: "-70px",
-              width: "290px",
-              height: "230px",
-              zIndex: "1",
+              position: 'absolute',
+              top: '-370px', // Adjust these values to position the image
+              left: '-70px',
+              width: '290px',
+              height: '230px',
+              zIndex: '1',
             }}
             alt="Woman"
           />
-          <Stack sx={{ marginTop: "-160%" }}>
+          <Stack sx={{marginTop: '-160%'}}>
             <Button
               sx={{
-                color: "rgba(26, 28, 28, 0.5)",
-                zIndex: "auto", // Change this to "auto"
-                marginBottom: "65%", // Change this to "0%"
-                marginTop: "-20px",
+                color: 'rgba(26, 28, 28, 0.5)',
+                zIndex: 'auto', // Change this to "auto"
+                marginBottom: '65%', // Change this to "0%"
+                marginTop: '-20px',
               }}
               variant="outlined"
             >
@@ -174,5 +177,5 @@ export default function Landing() {
         </Item>
       </Stack>
     </Stack>
-  );
+  )
 }
