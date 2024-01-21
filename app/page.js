@@ -9,21 +9,21 @@ export default function Landing() {
       width="100%"
       alignItems="center"
       sx={{
-        position: "relative",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        position: 'relative',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       <Item
         sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "25%",
-          width: "100%", // Add this line
-          height: "100%", // Add this line
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '25%',
+          width: '100%', // Add this line
+          height: '100%', // Add this line
         }}
       >
         <svg
@@ -53,13 +53,13 @@ export default function Landing() {
       </Item>
       <Item
         sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "-22px",
-          width: "100%", // Add this line
-          height: "100%", // Add this line
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '-22px',
+          width: '100%', // Add this line
+          height: '100%', // Add this line
         }}
       >
         <svg
@@ -77,59 +77,59 @@ export default function Landing() {
       </Item>
       <Item
         sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          fontFamily: "Helvetica",
-          fontSize: "36px",
-          fontWeight: "700",
-          color: "rgba(63, 170, 114, 1)",
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontFamily: 'Helvetica',
+          fontSize: '36px',
+          fontWeight: '700',
+          color: 'rgba(63, 170, 114, 1)',
         }}
       >
         BeSustainable
       </Item>
       <Item
         sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          fontFamily: "Helvetica",
-          fontSize: "20px",
-          fontWeight: "400",
-          color: "rgba(63, 170, 114, 1)",
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontFamily: 'Helvetica',
+          fontSize: '20px',
+          fontWeight: '400',
+          color: 'rgba(63, 170, 114, 1)',
         }}
       >
         Making sustainable food
       </Item>
       <Item
         sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          fontFamily: "Helvetica",
-          fontSize: "20px",
-          fontWeight: "400",
-          color: "rgba(63, 170, 114, 1)",
-          marginTop: "-10px",
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontFamily: 'Helvetica',
+          fontSize: '20px',
+          fontWeight: '400',
+          color: 'rgba(63, 170, 114, 1)',
+          marginTop: '-10px',
         }}
       >
         choices one step at a time.
       </Item>
       <Item
         sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          fontFamily: "Helvetica",
-          fontSize: "20px",
-          fontWeight: "400",
-          color: "rgba(63, 170, 114, 1)",
-          marginTop: "55%",
-          zIndex: "-100",
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontFamily: 'Helvetica',
+          fontSize: '20px',
+          fontWeight: '400',
+          color: 'rgba(63, 170, 114, 1)',
+          marginTop: '55%',
+          zIndex: '-100',
         }}
       >
         <svg
@@ -151,22 +151,22 @@ export default function Landing() {
           <img
             src="/woman.png"
             style={{
-              position: "absolute",
-              top: "-370px", // Adjust these values to position the image
-              left: "-70px",
-              width: "290px",
-              height: "230px",
-              zIndex: "1",
+              position: 'absolute',
+              top: '-370px', // Adjust these values to position the image
+              left: '-70px',
+              width: '290px',
+              height: '230px',
+              zIndex: '1',
             }}
             alt="Woman"
           />
-          <Stack sx={{ marginTop: "-160%" }}>
+          <Stack sx={{marginTop: '-160%'}}>
             <Button
               sx={{
-                color: "rgba(26, 28, 28, 0.5)",
-                zIndex: "auto", // Change this to "auto"
-                marginBottom: "65%", // Change this to "0%"
-                marginTop: "-20px",
+                color: 'rgba(26, 28, 28, 0.5)',
+                zIndex: 'auto', // Change this to "auto"
+                marginBottom: '65%', // Change this to "0%"
+                marginTop: '-20px',
               }}
               variant="outlined"
             >
@@ -176,5 +176,5 @@ export default function Landing() {
         </Item>
       </Stack>
     </Stack>
-  );
+  )
 }

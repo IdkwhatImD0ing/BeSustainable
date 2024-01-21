@@ -154,13 +154,15 @@ const ScannerCamera = () => {
   return (
     <Stack
       direction="column"
-      justifyContent="center"
+      justifyContent="flex-start"
       alignItems="center"
       width="100%"
       height="100vh"
       spacing={5}
+      paddingTop="20%"
     >
-      <Item
+      <Typography
+        variant="h2"
         sx={{
           justifyContent: 'center',
           fontFamily: 'Helvetica',
@@ -168,11 +170,10 @@ const ScannerCamera = () => {
           fontStyle: 'normal',
           fontWeight: 700,
           color: 'rgba(63, 170, 114, 1)',
-          top: '-10px',
         }}
       >
         BeSustainable
-      </Item>
+      </Typography>
 
       <Box width="450px" height="300px">
         <video
@@ -189,20 +190,18 @@ const ScannerCamera = () => {
 
       <Stack
         direction="column"
+        spacing={5}
         sx={{
           position: 'relative',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          marginTop: '50%', // Adjust this value to move the Stack down
         }}
       >
         <ButtonGroup
           size="small"
           variant="text"
           sx={{
-            marginTop: '10%',
-            marginBottom: '10%',
             width: '100%',
             position: 'relative',
             display: 'flex',
@@ -247,7 +246,6 @@ const ScannerCamera = () => {
             direction="row"
             sx={{
               justifyContent: 'center',
-              marginTop: '25%',
               position: 'relative',
             }}
           >
