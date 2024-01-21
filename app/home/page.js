@@ -153,7 +153,7 @@ export default function Home() {
         {posts.map((post, index) => (
           <PostBlock
             key={index}
-            imageUrl={post.imageUrl}
+            imageUrl={post.imageLink}
             caption={post.caption}
           />
         ))}

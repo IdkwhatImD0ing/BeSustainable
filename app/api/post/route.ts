@@ -1,5 +1,6 @@
 import { NextResponse, NextRequest } from 'next/server'
 import { getPosts, createPost } from '../../../lib/post-db'
+import createCaption from './caption'
 
 export async function GET(request: NextRequest) {
   try {
@@ -32,16 +33,19 @@ export async function POST(request: NextRequest) {
 
     // Parse the request body
     const body = await request.json();
-    const { userId, imageLink, caption } = body;
+    const { userId, image } = body;
 
-    if (!userId || !imageLink || !caption) {
+    // Create a caption for the post
+    const caption = await createCaption(image);
+
+    if (!userId || !image || !caption) {
       return NextResponse.json({ error: 'Missing required fields' }, {
         status: 400,
       });
     }
 
     // Call your helper function to create a post
-    const newPost = await createPost(userId, imageLink, caption);
+    const newPost = await createPost(userId, image, caption);
 
     // Return the new post in the response
     return NextResponse.json(newPost, {

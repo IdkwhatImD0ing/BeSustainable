@@ -3,18 +3,23 @@
 import {Stack, Button} from '@mui/material'
 import Item from '@mui/material/ListItem'
 import {LinearProgress} from '@mui/material'
-import Button from '@mui/material/Button'
 import {useState, useEffect} from 'react'
+import {useRouter} from 'next/navigation'
+import {useUser} from '@auth0/nextjs-auth0/client'
 
 export default function Results() {
-  const [ingredients, setIngredients] = useState('')
+  const [ingredients, setIngredients] = useState([])
   const [score, setScore] = useState(0)
   const [image, setImage] = useState('')
+  const [mode, setMode] = useState('')
+  const router = useRouter()
+  const {user} = useUser()
 
   useEffect(() => {
     setIngredients(localStorage.getItem('ingredients'))
     setScore(localStorage.getItem('score'))
     setImage(localStorage.getItem('image'))
+    setMode(localStorage.getItem('mode'))
   }, [])
 
   return (
@@ -148,11 +153,24 @@ export default function Results() {
           Sustainable or Not
         </Item>
       </Stack>
-      <Button
-        sx={{width: '331px', height: '60px', color: 'rgba(185, 220, 199, 1)'}}
-      >
-        Post
-      </Button>
+      {mode === 'upload' && (
+        <Button
+          onClick={() => {
+            fetch('/api/post', {
+              method: 'POST',
+              body: JSON.stringify({
+                userId: user.sid,
+                image: image,
+              }),
+            }).then(() => {
+              router.push('/home')
+            })
+          }}
+          sx={{width: '331px', height: '60px', color: 'rgba(185, 220, 199, 1)'}}
+        >
+          Post to social media
+        </Button>
+      )}
     </Stack>
   )
 }

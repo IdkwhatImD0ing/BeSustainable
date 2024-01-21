@@ -52,6 +52,7 @@ const ScannerCamera = () => {
                 'ingredients',
                 data.ingredients.matched_ingredients,
               )
+              localStorage.setItem('mode', 'scanner')
               localStorage.setItem('score', data.score)
               router.push('/results')
             })
@@ -118,6 +119,7 @@ const ScannerCamera = () => {
             data.ingredients.matched_ingredients,
           )
           localStorage.setItem('score', data.score)
+          localStorage.setItem('mode', mode)
           router.push('/results')
           // Handle successful response (e.g., display ingredients and score)
         } else {
