@@ -11,6 +11,8 @@ export async function POST(request) {
 
     let ingredientsString = '' // String of ingredients
 
+    console.log('Mode:', mode)
+
     // Handle different modes
     switch (mode) {
       case 'upc':
