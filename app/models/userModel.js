@@ -1,6 +1,11 @@
 const mongoose = require('mongoose')
+const {v4: uuidv4} = require('uuid')
 
 const userSchema = new mongoose.Schema({
+    _id: {
+        type: String,
+        default: uuidv4,
+    },
   scores: {
     type: [Number],
     default: [0, 0, 0, 0, 0, 0, 0],
