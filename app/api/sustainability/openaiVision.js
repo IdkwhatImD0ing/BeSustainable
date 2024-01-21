@@ -35,7 +35,7 @@ async function performOCRWithOpenAI(base64Image) {
     })
 
     // Process and return the response
-    console.log(response.choices[0].message.content)
+
     return response.choices[0].message.content
   } catch (error) {
     console.error('Error performing OCR with OpenAI:', error)

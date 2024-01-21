@@ -5,9 +5,13 @@ import {Box, Typography, Button, Stack, ButtonGroup} from '@mui/material'
 import CircleIcon from '@mui/icons-material/Circle'
 import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye'
 import Item from '@mui/material/ListItem'
+import Loading from './Loading'
+import {useRouter} from 'next/navigation'
 
 const ScannerCamera = () => {
   const [mode, setMode] = useState('scanner') // ['scanner', 'ingredients', 'upload'
+  const [loading, setLoading] = useState(false)
+  const router = useRouter()
 
   const videoRef = useRef()
 
@@ -30,6 +34,8 @@ const ScannerCamera = () => {
           // Save image to local storage
           const imageData = captureImage()
           localStorage.setItem('image', imageData)
+          codeReader.reset()
+          setLoading(true)
           fetch('/api/sustainability', {
             method: 'POST',
             headers: {
@@ -42,8 +48,12 @@ const ScannerCamera = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              localStorage.setItem('ingredients', data.ingredients)
+              localStorage.setItem(
+                'ingredients',
+                data.ingredients.matched_ingredients,
+              )
               localStorage.setItem('score', data.score)
+              router.push('/results')
             })
         }
 
@@ -52,17 +62,14 @@ const ScannerCamera = () => {
         }
       })
 
-      console.log(`Started continuous decode from the default camera.`)
-
       // Cleanup: Reset the code reader when the component is unmounted.
       return () => {
         codeReader.reset()
-        console.log('Reset.')
       }
     } else {
       startVideoStream(videoRef)
     }
-  }, [mode])
+  }, [mode, router])
 
   // Capture image and convert to base64
   const captureImage = () => {
@@ -81,7 +88,7 @@ const ScannerCamera = () => {
   }
 
   const handleCircleClick = async () => {
-    console.log('Circle Button Clicked')
+    setLoading(true)
     if (mode !== 'scanner') {
       const imageData = captureImage()
 
@@ -111,7 +118,7 @@ const ScannerCamera = () => {
             data.ingredients.matched_ingredients,
           )
           localStorage.setItem('score', data.score)
-          console.log('Response from server:', data)
+          router.push('/results')
           // Handle successful response (e.g., display ingredients and score)
         } else {
           console.error('Server responded with an error:', data.error)
@@ -136,6 +143,10 @@ const ScannerCamera = () => {
   // Change state of camera to upload a photo
   const handleUploadClick = () => {
     setMode('upload')
+  }
+
+  if (loading) {
+    return <Loading />
   }
 
   return (

@@ -1,18 +1,31 @@
-import { Stack, Box } from "@mui/material";
-import Item from "@mui/material/ListItem";
-import { LinearProgress } from "@mui/material";
-import Button from "@mui/material/Button";
+'use client'
+
+import {Stack, Button} from '@mui/material'
+import Item from '@mui/material/ListItem'
+import {LinearProgress} from '@mui/material'
+import Button from '@mui/material/Button'
+import {useState, useEffect} from 'react'
 
 export default function Results() {
+  const [ingredients, setIngredients] = useState('')
+  const [score, setScore] = useState(0)
+  const [image, setImage] = useState('')
+
+  useEffect(() => {
+    setIngredients(localStorage.getItem('ingredients'))
+    setScore(localStorage.getItem('score'))
+    setImage(localStorage.getItem('image'))
+  }, [])
+
   return (
     <Stack direction="column">
       <Item
         sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "10%",
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '10%',
         }}
       >
         <svg
@@ -42,11 +55,11 @@ export default function Results() {
       </Item>
       <Item
         sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "-27px",
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '-27px',
         }}
       >
         <svg
@@ -64,96 +77,82 @@ export default function Results() {
       </Item>
       <Item
         sx={{
-          width: "331px",
-          height: "311px",
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "10%",
-          color: "rgba(26, 28, 28, 0.5)",
+          width: '331px',
+          height: '311px',
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '10%',
+          color: 'rgba(26, 28, 28, 0.5)',
         }}
       >
-        picture
+        <img src={image} />
       </Item>
       <Item
         sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "10%",
-          fontFamily: "Helvetica",
-          fontSize: "24px",
-          fontWeight: "700",
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '10%',
+          fontFamily: 'Helvetica',
+          fontSize: '24px',
+          color: 'black',
+          fontWeight: '700',
         }}
       >
-        Ingredients
+        {ingredients}
       </Item>
+
       <Item
         sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "10%",
-          width: "299px",
-          fontFamily: "Helvetica",
-          fontSize: "20px",
-          fontWeight: "400",
-          color: "rgba(0, 0, 0, 1)",
+          fontFamily: 'Helvetica',
+          fontWeight: '700',
+          fontSize: '24px',
+          color: 'rgba(26, 28, 28, 1)',
         }}
       >
-        indegradients LoL
-      </Item>
-      <Item
-        sx={{
-          fontFamily: "Helvetica",
-          fontWeight: "700",
-          fontSize: "24px",
-          color: "rgba(26, 28, 28, 1)",
-        }}
-      >
-        Score
+        {score ? score.slice(0, 5) : 0}%
       </Item>
       <LinearProgress></LinearProgress>
       <Stack direction="row">
         <Item
           sx={{
-            fontFamily: "Helvetica",
-            fontSize: "64px",
-            fontWeight: "700",
-            color: "rgba(63, 170, 114, 1)",
+            fontFamily: 'Helvetica',
+            fontSize: '64px',
+            fontWeight: '700',
+            color: 'rgba(63, 170, 114, 1)',
           }}
         >
           X
         </Item>
         <Item
           sx={{
-            fontFamily: "Helvetica",
-            fontSize: "64px",
-            fontWeight: "700",
-            color: "rgba(63, 170, 114, 1)",
+            fontFamily: 'Helvetica',
+            fontSize: '64px',
+            fontWeight: '700',
+            color: 'rgba(63, 170, 114, 1)',
           }}
         >
           %
         </Item>
         <Item
           sx={{
-            fontFamily: "Helvetica",
-            fontSize: "24px",
-            fontWeight: "400",
-            color: "rgba(63, 170, 114, 1)",
+            fontFamily: 'Helvetica',
+            fontSize: '24px',
+            fontWeight: '400',
+            color: 'rgba(63, 170, 114, 1)',
           }}
         >
           Sustainable or Not
         </Item>
       </Stack>
       <Button
-        sx={{ width: "331px", height: "60px", color: "rgba(185, 220, 199, 1)" }}
+        sx={{width: '331px', height: '60px', color: 'rgba(185, 220, 199, 1)'}}
       >
-        Done
+        Post
       </Button>
     </Stack>
-  );
+  )
 }

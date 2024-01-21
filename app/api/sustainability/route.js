@@ -11,8 +11,6 @@ export async function POST(request) {
 
     let ingredientsString = '' // String of ingredients
 
-    console.log('Mode:', mode)
-
     // Handle different modes
     switch (mode) {
       case 'upc':
@@ -35,14 +33,12 @@ export async function POST(request) {
         )
     }
 
-    console.log('Ingredients:', ingredientsString)
     // Calculate the score based on matched ingredients
     const matchedIngredients = await matchIngredientsWithOpenAI(
       ingredientsString,
     )
-    console.log('Matched Ingredients:', matchedIngredients.matched_ingredients)
+
     const score = getScore(matchedIngredients.matched_ingredients)
-    console.log('Score:', score)
 
     // Return the list of matched ingredients and the score as response
     return NextResponse.json(

@@ -11,7 +11,6 @@ export default function Home() {
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
-    console.log('user', user)
     if (!user) return
     const fetchData = async () => {
       await fetch('/api/user', {
