@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 import Item from "@mui/material/ListItem";
 
-export default function Loading() {
+const Loading = () => {
   return (
     <Stack
       direction="column"
@@ -150,4 +150,6 @@ export default function Loading() {
       </Item>
     </Stack>
   );
-}
+};
+
+export default Loading;
