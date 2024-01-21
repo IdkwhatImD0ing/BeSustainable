@@ -5,11 +5,22 @@ import Container from "@mui/material/Container";
 import { getSession } from "@auth0/nextjs-auth0";
 import PersonIcon from "@mui/icons-material/Person";
 
+import PostBlock from './components/PostBlock';
+
 import styles from "./home.module.css";
+
 
 export default async function Home() {
   const { user } = await getSession();
   console.log(user);
+
+  const posts = []
+
+  const defaultPost = {
+    imageUrl: '', // Path to a default image or base64 encoded string
+    caption: 'No posts yet!'
+  };
+
   const icon = () => {
     return (
       <svg
@@ -87,6 +98,9 @@ export default async function Home() {
   //     </svg>
   //   );
   // };
+
+  // Page info not too sure but chatgpt said something like this
+ 
 
   return (
     <Box>
@@ -181,68 +195,25 @@ export default async function Home() {
         >
           Time to Feast
         </Item>
+
+        {posts.length === 0 ? (
+        // Render the default post if there are no posts
+        <PostBlock imageUrl={defaultPost.imageUrl} caption={defaultPost.caption} />
+      ) : (
+        // Otherwise, map over the posts and render them
+        posts.map((post, index) => (
+          <PostBlock key={index} imageUrl={post.imageUrl} caption={post.caption} />
+        ))
+      )}
+      
       </Stack>
+      
+      
 
-      <Box justifyContent="center" sx={{ marginTop: "-11%", marginLeft: "8%" }}>
-        <Box
-          sx={{
-            width: "300px",
-            height: "300px",
-            marginLeft: "3.5%",
-            justifyContent: "center",
-            marginTop: "10%",
-            display: "flex",
-            zIndex: "1",
-            backgroundColor: "rgba(166, 166, 166, 1)",
-          }}
-        ></Box>
-        <Box
-          sx={{
-            backgroundColor: "rgba(212, 212, 212, 1)",
-            width: " 300px",
-            marginLeft: "3.5%",
 
-            display: "flex",
-            justifyContent: "center",
-            height: "81px",
-            flexShrink: "0",
-          }}
-        >
-          <Stack direction="row">
-            <Item sx={{ color: "rgba(240, 197, 113, 1)", marginLeft: "-10%" }}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="27"
-                height="27"
-                viewBox="0 0 27 27"
-                fill="none"
-              >
-                <g clip-path="url(#clip0_27_326)">
-                  <path
-                    d="M7.15054 3.63936C7.33146 3.48698 7.55582 3.3955 7.79171 3.37793C8.02761 3.36035 8.26304 3.41759 8.46454 3.54149C12.3525 5.93436 14.4833 8.96174 15.6195 12.294C15.9008 13.1186 16.1202 13.959 16.29 14.8095C17.4477 12.8632 19.2972 11.3197 22.0827 10.206C22.2791 10.1276 22.4936 10.1061 22.7017 10.144C22.9097 10.1819 23.1029 10.2778 23.259 10.4205C23.4151 10.5632 23.5278 10.747 23.5842 10.9508C23.6405 11.1546 23.6383 11.3702 23.5778 11.5729L23.3742 12.2524C21.8442 17.3464 21.375 18.9067 21.375 22.5C21.375 22.7984 21.2565 23.0845 21.0455 23.2955C20.8346 23.5065 20.5484 23.625 20.25 23.625C19.9517 23.625 19.6655 23.5065 19.4545 23.2955C19.2436 23.0845 19.125 22.7984 19.125 22.5C19.125 19.0631 19.5525 17.2125 20.6663 13.4527C19.404 14.2897 18.5727 15.2617 18.0147 16.3384C17.154 17.9966 16.875 20.0306 16.875 22.5C16.875 22.7984 16.7565 23.0845 16.5455 23.2955C16.3346 23.5065 16.0484 23.625 15.75 23.625C15.4517 23.625 15.1655 23.5065 14.9545 23.2955C14.7436 23.0845 14.625 22.7984 14.625 22.5C14.625 19.134 14.4788 15.9221 13.4899 13.0196C12.8262 11.0745 11.7777 9.24974 10.0947 7.61736C11.2388 11.9599 11.25 16.1494 11.25 22.2131V22.5C11.25 22.7984 11.1315 23.0845 10.9205 23.2955C10.7096 23.5065 10.4234 23.625 10.125 23.625C9.82667 23.625 9.54052 23.5065 9.32954 23.2955C9.11857 23.0845 9.00004 22.7984 9.00004 22.5C9.00004 19.9237 8.98879 17.5826 8.35091 15.6037C7.98416 14.4641 7.40591 13.4437 6.45754 12.5955C7.49254 16.1426 7.87504 18.7684 7.87504 22.5C7.87504 22.7984 7.75651 23.0845 7.54553 23.2955C7.33456 23.5065 7.04841 23.625 6.75004 23.625C6.45167 23.625 6.16552 23.5065 5.95454 23.2955C5.74357 23.0845 5.62504 22.7984 5.62504 22.5C5.62504 18.153 5.09404 15.4631 3.43241 10.4805C3.36479 10.277 3.35672 10.0584 3.40917 9.85053C3.46161 9.64262 3.57238 9.45403 3.72842 9.30697C3.88447 9.15991 4.07929 9.06051 4.28994 9.02047C4.50059 8.98043 4.7183 9.00143 4.91741 9.08099C6.48679 9.70761 7.67929 10.5446 8.57929 11.5335C8.27811 9.26353 7.69069 7.04085 6.83104 4.91849C6.74295 4.69878 6.72641 4.45688 6.78378 4.22722C6.84114 3.99756 6.96948 3.79185 7.15054 3.63936Z"
-                    fill="#000000"
-                  />
-                </g>
-                <defs>
-                  <clipPath id="clip0_27_326">
-                    <rect width="27" height="27" fill="white" />
-                  </clipPath>
-                </defs>
-              </svg>
-            </Item>
-            <Stack direction="column">
-              <Item sx={{ color: "rgba(96, 143, 69, 1)" }}>
-                {captionicon()}
-              </Item>
-              <Item sx={{ marginRight: "40%" }}>Random Joke</Item>
-              <Stack direction="row" sx={{ marginTop: "-7%" }}>
-                <Item>Date</Item>
-                <Item sx={{ marginRight: "10%" }}> Time</Item>
-              </Stack>
-            </Stack>
-          </Stack>
-        </Box>
-      </Box>
+      
+      
+      
     </Box>
   );
 }
