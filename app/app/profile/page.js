@@ -7,7 +7,15 @@ import Item from "@mui/material/ListItem";
 import CircleIcon from "@mui/icons-material/Circle";
 import Image from "next/image";
 
-
+import {
+  LineChart,
+  Line,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+} from "@material-ui/lab";
 
 export default function Profile() {
   return (
