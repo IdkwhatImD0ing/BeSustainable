@@ -1,25 +1,23 @@
-import Tree from "./components/Tree";
-import { Stack, Box } from "@mui/material";
-import Item from "@mui/material/ListItem";
-import Container from "@mui/material/Container";
-import { getSession } from "@auth0/nextjs-auth0";
+import {getSession} from "@auth0/nextjs-auth0";
 import PersonIcon from "@mui/icons-material/Person";
+import {Box, Stack} from "@mui/material";
+import Container from "@mui/material/Container";
+import Item from "@mui/material/ListItem";
 
 import PostBlock from './components/PostBlock';
-
+import Tree from "./components/Tree";
 import styles from "./home.module.css";
 
-
 export default async function Home() {
-  const { user } = await getSession();
+  const {user} = await getSession();
   console.log(user);
 
   const posts = []
 
-  const defaultPost = {
-    imageUrl: '', // Path to a default image or base64 encoded string
-    caption: 'No posts yet!'
-  };
+      const defaultPost = {
+        imageUrl : '', // Path to a default image or base64 encoded string
+        caption : 'No posts yet!'
+      };
 
   const icon = () => {
     return (
