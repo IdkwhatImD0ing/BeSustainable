@@ -1,36 +1,36 @@
-'use client'
-import React, {useEffect, useState} from 'react'
-import {BrowserMultiFormatReader, NotFoundException} from '@zxing/library'
-import {Box, Typography, Button, Stack, ButtonGroup} from '@mui/material'
-import CircleIcon from '@mui/icons-material/Circle'
-import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye'
-import Item from '@mui/material/ListItem'
+"use client";
+import React, { useEffect, useState } from "react";
+import { BrowserMultiFormatReader, NotFoundException } from "@zxing/library";
+import { Box, Typography, Button, Stack, ButtonGroup } from "@mui/material";
+import CircleIcon from "@mui/icons-material/Circle";
+import PanoramaFishEyeIcon from "@mui/icons-material/PanoramaFishEye";
+import Item from "@mui/material/ListItem";
 
 const ScannerCamera = () => {
-  const [result, setResult] = useState('No Code')
-  const codeReader = new BrowserMultiFormatReader()
+  const [result, setResult] = useState("No Code");
+  const codeReader = new BrowserMultiFormatReader();
 
   useEffect(() => {
     // Start decoding from the default video device.
-    codeReader.decodeFromVideoDevice(null, 'video', (result, err) => {
+    codeReader.decodeFromVideoDevice(null, "video", (result, err) => {
       if (result) {
-        console.log(result)
-        setResult(result.text)
+        console.log(result);
+        setResult(result.text);
       }
 
       if (err && !(err instanceof NotFoundException)) {
-        console.error(err)
+        console.error(err);
       }
-    })
+    });
 
-    console.log(`Started continuous decode from the default camera.`)
+    console.log(`Started continuous decode from the default camera.`);
 
     // Cleanup: Reset the code reader when the component is unmounted.
     return () => {
-      codeReader.reset()
-      console.log('Reset.')
-    }
-  }, [codeReader])
+      codeReader.reset();
+      console.log("Reset.");
+    };
+  }, [codeReader]);
 
   const flashicon = () => (
     <svg
@@ -45,30 +45,26 @@ const ScannerCamera = () => {
         fill="#3FAA72"
       />
     </svg>
-  )
+  );
 
   // Take photo where depending on state, use OCR or save it to db or do nothing if in scanning state
   const handleCircleClick = () => {
     console.log("Circle Button Clicked");
-    
   };
 
   // Change state of camera to scan ingredients
   const handleIngredientsClick = () => {
     console.log("Ingredients Button Clicked");
-    
   };
 
   // Change state of camera to scan qr code
   const handleScannerClick = () => {
     console.log("Scanner Button Clicked");
-    
   };
 
   // Change state of camera to upload a photo
   const handleUploadClick = () => {
     console.log("Upload Button Clicked");
-    
   };
 
   return (
@@ -82,12 +78,13 @@ const ScannerCamera = () => {
     >
       <Item
         sx={{
-          justifyContent: 'center',
-          fontFamily: 'Helvetica',
-          fontSize: '24px',
-          fontStyle: 'normal',
+          justifyContent: "center",
+          fontFamily: "Helvetica",
+          fontSize: "30px",
+          fontStyle: "normal",
           fontWeight: 700,
-          color: 'rgba(63, 170, 114, 1)',
+          color: "rgba(63, 170, 114, 1)",
+          top: "-10px",
         }}
       >
         BeSustainable
@@ -96,84 +93,118 @@ const ScannerCamera = () => {
       <Box width="450px" height="300px">
         <video
           id="video"
-          style={{position: 'relative', height: '100%', width: '100%'}}
+          style={{
+            position: "relative",
+            height: "100%",
+            width: "100%",
+            padding: "20px",
+          }}
         />
       </Box>
+      <Stack
+        direction="column"
+        sx={{
+          position: "relative",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "50%", // Adjust this value to move the Stack down
+        }}
+      >
+        <Typography
+          variant="subtitle1"
+          color="black"
+          sx={{ marginTop: "-10%", fontWeight: "bold", fontSize: "20px" }}
+        >
+          {result}
+        </Typography>
 
-      <Typography variant="subtitle1" color="black">
-        {result}
-      </Typography>
-
-      <ButtonGroup size="small" variant="text">
-        <Button
-          style={{
-            color: 'rgba(63, 170, 114, 1)',
-            fontFamily: 'Helvetica',
-          }}
-          onClick={handleIngredientsClick}
-        >
-          Ingredients
-        </Button>
-        <Button
-          style={{
-            marginRight: '2.5%',
-            color: 'rgba(63, 170, 114, 1)',
-            fontFamily: 'Helvetica',
-          }}
-          onClick={handleScannerClick}
-        >
-          Scanner
-        </Button>
-        <Button
-          style={{
-            color: 'rgba(63, 170, 114, 1)',
-            fontFamily: 'Helvetica',
-          }}
-          onClick={handleUploadClick}
-        >
-          Upload
-        </Button>
-      </ButtonGroup>
-      <Stack direction="row" sx={{justifyContent: 'center'}}>
-        <Stack
-          direction="row"
+        <ButtonGroup
+          size="small"
+          variant="text"
           sx={{
-            justifyContent: 'center',
-            marginTop: '10%',
-            position: 'relative',
+            marginTop: "10%",
+            marginBottom: "10%",
+            width: "100%",
+            position: "relative",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <Button
             style={{
-              borderRadius: '90%',
-              width: '50px',
-              height: '70px',
-              padding: '10px',
-              color: 'rgba(63, 170, 114, 1)',
-              fontFamily: 'Helvetica',
-              position: 'relative',
-              zIndex: 5, // increased from 1
+              color: "rgba(63, 170, 114, 1)",
+              fontFamily: "Helvetica",
+              marginRight: "2.5%",
+              marginLeft: "-6.5%",
             }}
-            onClick={handleCircleClick}
+            onClick={handleIngredientsClick}
           >
-            <CircleIcon style={{fontSize: '65px'}} />
+            Ingredients
           </Button>
-          <PanoramaFishEyeIcon
+          <Button
             style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              color: 'rgba(63, 170, 114, 1)',
-
-              transform: 'translate(-50%, -50%)',
-              fontSize: '95px',
-              zIndex: 1, // decreased from 2
+              color: "rgba(63, 170, 114, 1)",
+              fontFamily: "Helvetica",
+              margin: "auto",
             }}
-          />
+            onClick={handleScannerClick}
+          >
+            Scanner
+          </Button>
+          <Button
+            style={{
+              color: "rgba(63, 170, 114, 1)",
+              fontFamily: "Helvetica",
+              marginLeft: "3.5%",
+            }}
+            onClick={handleUploadClick}
+          >
+            Upload
+          </Button>
+        </ButtonGroup>
+        <Stack direction="row" sx={{ justifyContent: "center" }}>
+          <Stack
+            direction="row"
+            sx={{
+              justifyContent: "center",
+              marginTop: "25%",
+              position: "relative",
+            }}
+          >
+            <Button
+              style={{
+                borderRadius: "90%",
+                width: "50px",
+                height: "70px",
+                padding: "10px",
+                color: "rgba(63, 170, 114, 1)",
+                fontFamily: "Helvetica",
+                position: "relative",
+                zIndex: 5, // increased from 1
+              }}
+              onClick={handleCircleClick}
+            >
+              <CircleIcon style={{ fontSize: "65px" }} />
+            </Button>
+            <PanoramaFishEyeIcon
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                color: "rgba(63, 170, 114, 1)",
+
+                transform: "translate(-50%, -50%)",
+                fontSize: "95px",
+                zIndex: 1, // decreased from 2
+              }}
+            />
+          </Stack>
         </Stack>
       </Stack>
     </Stack>
-  )
-}
+  );
+};
 
-export default ScannerCamera
+export default ScannerCamera;
