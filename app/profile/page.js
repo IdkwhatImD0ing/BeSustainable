@@ -7,17 +7,11 @@ import Item from "@mui/material/ListItem";
 import CircleIcon from "@mui/icons-material/Circle";
 import Image from "next/image";
 
-import {
-  LineChart,
-  Line,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-} from "@material-ui/lab";
+import LineChartComponent from "../components/LineChart";
 
 export default function Profile() {
+  const scores = [15, 2, 43, 25, 47, 21, 70]
+
   return (
     <Box sx={{ justifyContent: "center" }}>
       <Stack direction="column">
@@ -75,10 +69,15 @@ export default function Profile() {
             height: "273px",
             flexSrink: "0",
             justifyContent: "center",
-            backgroundColor: " gray",
+            backgroundColor: "white",
           }}
         >
-          <Item sx={{ color: "black" }}>Add Chart</Item>
+          
+            <LineChartComponent data={scores} />
+          
+
+          
+          
           {/* <Stack direction="column">
             <Stack direction="row">
               <Item>

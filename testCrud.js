@@ -1,10 +1,11 @@
 require('dotenv').config({ path: './.env.local' });
 
-const { getStepConnectorUtilityClass } = require('@mui/material');
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const clientPromise = require('./lib/mongodb');
+
+const { getStepConnectorUtilityClass } = require('@mui/material');
 const { createPost, getPosts } = require('./lib/post-db');
 const { createUser, getUserByEmail, updateScore, getScores, getUserById } = require('./lib/user-db'); // Adjust paths as necessary
 
