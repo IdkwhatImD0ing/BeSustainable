@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { BrowserMultiFormatReader, NotFoundException } from "@zxing/library";
 import { Box, Typography, Button, Stack, ButtonGroup } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
@@ -8,63 +8,112 @@ import Item from "@mui/material/ListItem";
 
 const ScannerCamera = () => {
   const [result, setResult] = useState("No Code");
+  const [mode, setMode] = useState("scanner"); // ['scanner', 'ingredients', 'upload'
   const codeReader = new BrowserMultiFormatReader();
+  const videoRef = useRef();
 
-  useEffect(() => {
-    // Start decoding from the default video device.
-    codeReader.decodeFromVideoDevice(null, "video", (result, err) => {
-      if (result) {
-        console.log(result);
-        setResult(result.text);
-      }
-
-      if (err && !(err instanceof NotFoundException)) {
-        console.error(err);
-      }
-    });
-
-    console.log(`Started continuous decode from the default camera.`);
-
-    // Cleanup: Reset the code reader when the component is unmounted.
-    return () => {
-      codeReader.reset();
-      console.log("Reset.");
-    };
-  }, [codeReader]);
-
-  const flashicon = () => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="80"
-      height="80"
-      viewBox="0 0 35 35"
-      fill="none"
-    >
-      <path
-        d="M10.5075 3.565C10.6289 3.25126 10.8424 2.98161 11.12 2.79152C11.3975 2.60142 11.7261 2.4998 12.0625 2.5H22.7075C23.8663 2.5 24.67 3.6525 24.2725 4.74L21.655 11.875H27.7013C29.1738 11.875 29.9225 13.645 28.8975 14.7025L12.23 31.8787C10.805 33.3475 8.34754 32.025 8.78879 30.0262L10.8638 20.625H7.39629C7.00689 20.6249 6.62337 20.53 6.27893 20.3483C5.9345 20.1667 5.63951 19.9038 5.41952 19.5825C5.19953 19.2612 5.06116 18.8911 5.01638 18.5043C4.97161 18.1175 5.02177 17.7256 5.16254 17.3625L10.5075 3.565Z"
-        fill="#3FAA72"
-      />
-    </svg>
-  );
-
-  // Take photo where depending on state, use OCR or save it to db or do nothing if in scanning state
-  const handleCircleClick = () => {
-    console.log("Circle Button Clicked");
+  const startVideoStream = async (videoElementRef) => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      videoElementRef.current.srcObject = stream;
+      videoElementRef.current.play();
+    } catch (error) {
+      console.error("Error accessing the camera:", error);
+    }
   };
 
+  useEffect(() => {
+    if (mode === "scanner") {
+      // Start decoding from the default video device.
+      codeReader.decodeFromVideoDevice(null, "video", (result, err) => {
+        if (result) {
+          console.log(result);
+          setResult(result.text);
+        }
+
+        if (err && !(err instanceof NotFoundException)) {
+          console.error(err);
+        }
+      });
+
+      console.log(`Started continuous decode from the default camera.`);
+
+      // Cleanup: Reset the code reader when the component is unmounted.
+      return () => {
+        codeReader.reset();
+        console.log("Reset.");
+      };
+    } else {
+      startVideoStream(videoRef);
+    }
+  }, [codeReader, mode]);
+
+  // Capture image and convert to base64
+  const captureImage = () => {
+    const video = videoRef.current;
+    if (!video) {
+      return;
+    }
+
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const imageData = canvas.toDataURL("image/png");
+    return imageData;
+  };
+
+  const handleCircleClick = async () => {
+    console.log("Circle Button Clicked");
+    if (mode !== "scanner") {
+      const imageData = captureImage();
+
+      // Determine the mode for the API ('ocr' or 'vision')
+      const apiMode = mode === "ingredients" ? "ocr" : "vision";
+
+      // Prepare the body of the POST request
+      const requestBody = {
+        mode: apiMode,
+        image: imageData, // Ensure this is in the correct format expected by your API
+      };
+
+      try {
+        const response = await fetch("/api/sustainability", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestBody),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          console.log("Response from server:", data);
+          // Handle successful response (e.g., display ingredients and score)
+        } else {
+          console.error("Server responded with an error:", data.error);
+          // Handle errors (e.g., show error message to the user)
+        }
+      } catch (error) {
+        console.error("Error making the request:", error);
+        // Handle network errors (e.g., show error message to the user)
+      }
+    }
+  };
   // Change state of camera to scan ingredients
   const handleIngredientsClick = () => {
-    console.log("Ingredients Button Clicked");
+    setMode("ingredients");
   };
 
   // Change state of camera to scan qr code
   const handleScannerClick = () => {
-    console.log("Scanner Button Clicked");
+    setMode("scanner");
   };
 
   // Change state of camera to upload a photo
   const handleUploadClick = () => {
-    console.log("Upload Button Clicked");
+    setMode("upload");
   };
 
   return (
@@ -89,18 +138,29 @@ const ScannerCamera = () => {
       >
         BeSustainable
       </Item>
+      {mode === "scanner" && (
+        <Box width="450px" height="300px">
+          <video
+            id="video"
+            style={{
+              position: "relative",
+              height: "100%",
+              width: "100%",
+              padding: "20px",
+            }}
+          />
+        </Box>
+      )}
 
-      <Box width="450px" height="300px">
-        <video
-          id="video"
-          style={{
-            position: "relative",
-            height: "100%",
-            width: "100%",
-            padding: "20px",
-          }}
-        />
-      </Box>
+      {(mode === "ingredients" || mode === "upload") && (
+        <Box width="450px" height="300px">
+          <video
+            id="camera"
+            ref={videoRef}
+            style={{ position: "relative", height: "100%", width: "100%" }}
+          />
+        </Box>
+      )}
       <Stack
         direction="column"
         sx={{

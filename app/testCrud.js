@@ -6,7 +6,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 
 const clientPromise = require('./lib/mongodb');
 const { createPost, getPosts } = require('./lib/post-db');
-const { createUser, getUserByEmail, updateScore, getScores } = require('./lib/user-db'); // Adjust paths as necessary
+const { createUser, getUserByEmail, updateScore, getScores, getUserById } = require('./lib/user-db'); // Adjust paths as necessary
 
 async function testCRUD() {
     try {
@@ -17,24 +17,24 @@ async function testCRUD() {
       const db = client.db();
       
       // Create a new user
-      const user = await createUser('testuser2', 'test2@example.com', 'password1235');
+      const user = await createUser('123456');
       console.log('User created:', user);
       
-  
+
       // Fetch user by email
-      const fetchedByEmail = await getUserByEmail('test2@example.com');
-      console.log('User fetched by email:', fetchedByEmail);
+      const fetched = await getUserById('123456');
+      console.log('User fetched by email:', fetched);
 
-      const post = await createPost(fetchedByEmail._id, "https://test.com", "HAHAHA FUNNY");
+      const post = await createPost(fetched._id, "https://test.com", "HAHAHA FUNNY");
       console.log("Posted", post);
 
-      const postTwo = await createPost(fetchedByEmail._id, "https://test2.com", "HAHAHA FUNNY2");
-      console.log("Posted", post);
+      const postTwo = await createPost(fetched._id, "https://test2.com", "HAHAHA FUNNY2");
+      console.log("Posted", postTwo);
 
-      const posts = await getPosts(fetchedByEmail._id);
+      const posts = await getPosts(fetched._id);
       console.log("See Posts", posts);
 
-      const score = await updateScore(fetchedByEmail._id, 5, 10);
+      const score = await updateScore(fetched._id, 5, 10);
       console.log("Updated Score", score);
 
   

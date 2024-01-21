@@ -8,7 +8,7 @@ async function performOCRWithOpenAI(base64Image) {
   const openai = new OpenAI(process.env.OPENAI_API_KEY)
   const dataUri = base64Image
 
-  const prompt = `Here is an image of a food item. Extract all the ingredients you can detect from the image.
+  const prompt = `Here is an image of a food item. Please extract all the ingredients you can detect from the image.
     Example Response:
     Eggs, Cheese, Milk
     `
