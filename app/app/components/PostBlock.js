@@ -3,13 +3,8 @@ import React from "react";
 
 const PostBlock = ({ imageUrl, caption }) => {
   return (
-    <Box
-      justifyContent="center"
-      sx={{
-        marginTop: "-11%",
-        marginLeft: "8%",
-      }}
-    >
+    <Box justifyContent="center" sx={{ marginTop: "-11%", marginLeft: "8%" }}>
+      {" "}
       <Box
         sx={{
           width: "300px",
