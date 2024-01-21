@@ -1,24 +1,22 @@
-import Tree from "./components/Tree";
-import { Stack, Box } from "@mui/material";
-import Item from "@mui/material/ListItem";
-import Container from "@mui/material/Container";
 import { getSession } from "@auth0/nextjs-auth0";
 import PersonIcon from "@mui/icons-material/Person";
+import { Box, Stack } from "@mui/material";
+import Container from "@mui/material/Container";
+import Item from "@mui/material/ListItem";
 
-import PostBlock from './components/PostBlock';
-
+import PostBlock from "./components/PostBlock";
+import Tree from "./components/Tree";
 import styles from "./home.module.css";
-
 
 export default async function Home() {
   const { user } = await getSession();
   console.log(user);
 
-  const posts = []
+  const posts = [];
 
   const defaultPost = {
-    imageUrl: '', // Path to a default image or base64 encoded string
-    caption: 'No posts yet!'
+    imageUrl: "", // Path to a default image or base64 encoded string
+    caption: "No posts yet!",
   };
 
   const icon = () => {
@@ -100,7 +98,6 @@ export default async function Home() {
   // };
 
   // Page info not too sure but chatgpt said something like this
- 
 
   return (
     <Box>
@@ -197,23 +194,22 @@ export default async function Home() {
         </Item>
 
         {posts.length === 0 ? (
-        // Render the default post if there are no posts
-        <PostBlock imageUrl={defaultPost.imageUrl} caption={defaultPost.caption} />
-      ) : (
-        // Otherwise, map over the posts and render them
-        posts.map((post, index) => (
-          <PostBlock key={index} imageUrl={post.imageUrl} caption={post.caption} />
-        ))
-      )}
-      
+          // Render the default post if there are no posts
+          <PostBlock
+            imageUrl={defaultPost.imageUrl}
+            caption={defaultPost.caption}
+          />
+        ) : (
+          // Otherwise, map over the posts and render them
+          posts.map((post, index) => (
+            <PostBlock
+              key={index}
+              imageUrl={post.imageUrl}
+              caption={post.caption}
+            />
+          ))
+        )}
       </Stack>
-      
-      
-
-
-      
-      
-      
     </Box>
   );
 }
