@@ -18,6 +18,7 @@
     "@google-cloud/vision": "^4.0.2",
     "@mui/icons-material": "^5.15.5",
     "@mui/material": "^5.15.5",
+    "@mui/material-next": "^6.0.0-alpha.118",
     "@typegoose/typegoose": "^12.1.0",
     "dotenv": "^16.3.2",
     "axios": "^1.6.5",
