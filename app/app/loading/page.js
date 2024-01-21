@@ -146,7 +146,7 @@ export default function Loading() {
           fontFamily: "Helvetica",
         }}
       >
-        BeSustainable
+        Please wait for you results to load...
       </Item>
     </Stack>
   );

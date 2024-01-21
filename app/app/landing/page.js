@@ -1,6 +1,7 @@
 "use client";
 import { Stack, Box } from "@mui/material";
 import Item from "@mui/material/ListItem";
+<<<<<<< HEAD
 import Button from "@material-ui/core/Button";
 export default function Landing() {
   return (
@@ -18,11 +19,33 @@ export default function Landing() {
     >
       <Item
         sx={{
+=======
+import Button from "@mui/material/Button";
+
+export default function Landing() {
+  return (
+    <Stack
+      sx={{
+        position: "absolute",
+        marginRight: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        height: "50vh", // Optional: This makes the Stack take up the full viewport height
+      }}
+    >
+      <Item
+        style={{
+          marginTop: "25%",
+>>>>>>> conniebranch
           position: "relative",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+<<<<<<< HEAD
           marginTop: "25%",
+=======
+>>>>>>> conniebranch
         }}
       >
         <svg
@@ -51,12 +74,20 @@ export default function Landing() {
         </svg>
       </Item>
       <Item
+<<<<<<< HEAD
         sx={{
+=======
+        style={{
+>>>>>>> conniebranch
           position: "relative",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+<<<<<<< HEAD
           marginTop: "-22px",
+=======
+          top: "-22px",
+>>>>>>> conniebranch
         }}
       >
         <svg
@@ -88,6 +119,10 @@ export default function Landing() {
       </Item>
       <Item
         sx={{
+<<<<<<< HEAD
+=======
+          top: "16px",
+>>>>>>> conniebranch
           position: "relative",
           display: "flex",
           justifyContent: "center",
@@ -110,6 +145,7 @@ export default function Landing() {
           fontSize: "20px",
           fontWeight: "400",
           color: "rgba(63, 170, 114, 1)",
+<<<<<<< HEAD
           marginTop: "-10px",
         }}
       >
@@ -129,6 +165,14 @@ export default function Landing() {
           zIndex: "-100",
         }}
       >
+=======
+        }}
+      >
+        choices one step at a time
+      </Item>
+      <Item sx={{ position: "absolute", zIndex: "-1000", marginTop: "250%" }}>
+        {" "}
+>>>>>>> conniebranch
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="390"
@@ -142,12 +186,18 @@ export default function Landing() {
           />
         </svg>
       </Item>
+<<<<<<< HEAD
 
       <Stack direction="column">
+=======
+      <Stack direction="row">
+        <Item>cart</Item>
+>>>>>>> conniebranch
         <Item>
           <img
             src="/woman.png"
             style={{
+<<<<<<< HEAD
               position: "absolute",
               top: "-370px", // Adjust these values to position the image
               left: "-70px",
@@ -172,6 +222,34 @@ export default function Landing() {
           </Stack>
         </Item>
       </Stack>
+=======
+              position: "relative",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              right: "25px",
+              marginTop: "10%",
+              marginBottom: "-100%",
+              zIndex: "4",
+              margin: "auto",
+            }}
+            alt="Woman"
+          />
+        </Item>{" "}
+      </Stack>
+      <Button
+        sx={{
+          position: "relative",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginBottom: "-100%",
+        }}
+        variant="outlined"
+      >
+        Get Started
+      </Button>
+>>>>>>> conniebranch
     </Stack>
   );
 }
