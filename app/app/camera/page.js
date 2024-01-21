@@ -157,7 +157,12 @@ const ScannerCamera = () => {
           <video
             id="camera"
             ref={videoRef}
-            style={{ position: "relative", height: "100%", width: "100%" }}
+            style={{
+              position: "relative",
+              height: "100%",
+              width: "100%",
+              padding: "20px",
+            }}
           />
         </Box>
       )}
