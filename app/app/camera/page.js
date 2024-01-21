@@ -114,6 +114,30 @@ const ScannerCamera = () => {
     </svg>;
   };
 
+  // Take photo where depending on state, use OCR or save it to db or do nothing if in scanning state
+  const handleCircleClick = () => {
+    console.log("Circle Button Clicked");
+    
+  };
+
+  // Change state of camera to scan ingredients
+  const handleIngredientsClick = () => {
+    console.log("Ingredients Button Clicked");
+    
+  };
+
+  // Change state of camera to scan qr code
+  const handleScannerClick = () => {
+    console.log("Scanner Button Clicked");
+    
+  };
+
+  // Change state of camera to upload a photo
+  const handleUploadClick = () => {
+    console.log("Upload Button Clicked");
+    
+  };
+
   return (
     <Stack
       direction="column"
@@ -150,6 +174,7 @@ const ScannerCamera = () => {
             color: "rgba(63, 170, 114, 1)",
             fontFamily: "Helvetica",
           }}
+          onClick={handleIngredientsClick}
         >
           Ingredients
         </Button>
@@ -159,6 +184,7 @@ const ScannerCamera = () => {
             color: "rgba(63, 170, 114, 1)",
             fontFamily: "Helvetica",
           }}
+          onClick={handleScannerClick}
         >
           Scanner
         </Button>
@@ -167,6 +193,7 @@ const ScannerCamera = () => {
             color: "rgba(63, 170, 114, 1)",
             fontFamily: "Helvetica",
           }}
+          onClick={handleUploadClick}
         >
           Upload
         </Button>
@@ -191,6 +218,7 @@ const ScannerCamera = () => {
               position: "relative",
               zIndex: 5, // increased from 1
             }}
+            onClick={handleCircleClick}
           >
             <CircleIcon style={{ fontSize: "65px" }} />
           </Button>
