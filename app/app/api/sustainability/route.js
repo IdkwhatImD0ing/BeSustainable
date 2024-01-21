@@ -2,6 +2,7 @@ import performOCR from './gcpVision'
 import {matchIngredientsWithOpenAI, performOCRWithOpenAI} from './openaiVision'
 import fetchIngredientsByUPC from './spoonacular'
 import getScore from './utils'
+import {NextResponse} from 'next/server'
 
 export async function POST(request) {
   try {
@@ -22,19 +23,44 @@ export async function POST(request) {
         ingredientsString = await performOCRWithOpenAI(image)
         break
       default:
-        return {status: 400, body: {error: 'Invalid mode specified'}}
+        return NextResponse.json(
+          {
+            error: 'Invalid mode',
+          },
+          {
+            status: 400,
+          },
+        )
     }
 
+    console.log('Ingredients:', ingredientsString)
     // Calculate the score based on matched ingredients
     const matchedIngredients = await matchIngredientsWithOpenAI(
       ingredientsString,
     )
-    const score = getScore(matchedIngredients)
+    console.log('Matched Ingredients:', matchedIngredients.matched_ingredients)
+    const score = getScore(matchedIngredients.matched_ingredients)
+    console.log('Score:', score)
 
     // Return the list of matched ingredients and the score as response
-    return {status: 200, body: {matchedIngredients, score}}
+    return NextResponse.json(
+      {
+        ingredients: matchedIngredients,
+        score: score,
+      },
+      {
+        status: 200,
+      },
+    )
   } catch (error) {
     console.error('Error in POST route:', error)
-    return {status: 500, body: {error: 'Internal Server Error'}}
+    return NextResponse.json(
+      {
+        error: error.message,
+      },
+      {
+        status: 500,
+      },
+    )
   }
 }

@@ -8,14 +8,16 @@ async function performOCRWithOpenAI(base64Image) {
   const openai = new OpenAI(process.env.OPENAI_API_KEY)
   const dataUri = base64Image
 
-  const prompt =
-    'Here is an image of a food item. Here is the list of ingredients:\n' +
-    INGREDIENTS +
-    '\nWhat are the ingredients from that list which is in this food item?\n\nImage:'
+  const prompt = `Here is an image of a food item. Extract all the ingredients you can detect from the image.
+    Example Response:
+    Eggs, Cheese, Milk
+    `
 
   try {
     const response = await openai.chat.completions.create({
       model: 'gpt-4-vision-preview',
+      temperature: 0,
+      max_tokens: 2000,
       messages: [
         {
           role: 'user',
@@ -33,8 +35,8 @@ async function performOCRWithOpenAI(base64Image) {
     })
 
     // Process and return the response
-    console.log(response.choices[0])
-    return response.choices[0]
+    console.log(response.choices[0].message.content)
+    return response.choices[0].message.content
   } catch (error) {
     console.error('Error performing OCR with OpenAI:', error)
     throw error
@@ -47,6 +49,7 @@ async function performOCRWithOpenAI(base64Image) {
  * @returns {Promise<string[]>} - A promise that resolves to a list of matching ingredients.
  */
 async function matchIngredientsWithOpenAI(ingredientsString) {
+  const openai = new OpenAI(process.env.OPENAI_API_KEY)
   // Prepare the message for the AI
   const message = `Reference Ingredients:
   ${INGREDIENTS}
@@ -54,7 +57,12 @@ async function matchIngredientsWithOpenAI(ingredientsString) {
   Parsed Text:
   ${ingredientsString}
 
-  This is a text parsed from an image. Please match the ingredients from the reference list with the ingredients from the parsed text.`
+  This is a text parsed from an image. Please match the ingredients from the reference list with the ingredients from the parsed text.
+  Example Response:
+  {
+    matched_ingredients: [Milk, Cheese, Tofu]
+  }
+  `
 
   try {
     const completion = await openai.chat.completions.create({
