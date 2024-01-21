@@ -1,11 +1,11 @@
-import Link from "next/link";
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import HomeIcon from "@mui/icons-material/Home";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { AccountCircle, PhotoCamera } from "@mui/icons-material";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import styles from "./BottomNavbar.module.css";
+import Link from 'next/link'
+import BottomNavigation from '@mui/material/BottomNavigation'
+import BottomNavigationAction from '@mui/material/BottomNavigationAction'
+import HomeIcon from '@mui/icons-material/Home'
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
+import { AccountCircle,PhotoCamera} from '@mui/icons-material'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import styles from './BottomNavbar.module.css'
 
 const BottomNav = () => {
   return (
@@ -71,4 +71,4 @@ const BottomNav = () => {
   );
 };
 
-export default BottomNav;
+export default BottomNav

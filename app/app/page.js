@@ -1,10 +1,15 @@
-import PersonIcon from "@mui/icons-material/Person";
 import Tree from "./components/Tree";
 import { Stack, Box } from "@mui/material";
 import Item from "@mui/material/ListItem";
 import Container from "@mui/material/Container";
+import { getSession } from "@auth0/nextjs-auth0";
+import PersonIcon from "@mui/icons-material/Person";
 
-export default function Home() {
+import styles from "./home.module.css";
+
+export default async function Home() {
+  const { user } = await getSession();
+  console.log(user);
   const icon = () => {
     return (
       <svg

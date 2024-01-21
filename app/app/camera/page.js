@@ -1,12 +1,104 @@
-import Box from "@mui/material/Box";
-import Item from "@mui/material/ListItem";
-import ButtonGroup from "@mui/material-next/ButtonGroup";
-import { Button } from "@mui/material-next";
-import Stack from "@mui/material/Stack";
+"use client";
+import React, { useEffect, useState } from "react";
+import Quagga from "@ericblade/quagga2";
+import { Box, Typography, Button, Stack, ButtonGroup } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
 import PanoramaFishEyeIcon from "@mui/icons-material/PanoramaFishEye";
+import "./styles.css";
+import Item from "@mui/material/ListItem";
 
-export default function Camera() {
+const ScannerCamera = () => {
+  const [result, setResult] = useState("No Code");
+
+  useEffect(() => {
+    const config = {
+      inputStream: {
+        type: "LiveStream",
+        constraints: {
+          width: { ideal: 300 },
+          height: { ideal: 450 },
+          facingMode: "environment",
+        },
+        willReadFrequently: true,
+      },
+      locator: {
+        patchSize: "large",
+        halfSample: true,
+        willReadFrequently: true,
+      },
+      numOfWorkers: 2,
+      frequency: 10,
+      decoder: {
+        readers: ["upc_reader"],
+      },
+      locate: true,
+    };
+    try {
+      Quagga.init(config, (err) => {
+        if (err) {
+          console.log(err, "error msg");
+          return;
+        }
+        Quagga.start();
+        console.log("init");
+        return () => {
+          Quagga.stop();
+        };
+      });
+
+      //detecting boxes on stream
+      Quagga.onProcessed((result) => {
+        var drawingCtx = Quagga.canvas.ctx.overlay,
+          drawingCanvas = Quagga.canvas.dom.overlay;
+
+        if (result) {
+          if (result.boxes) {
+            drawingCtx.clearRect(
+              0,
+              0,
+              Number(drawingCanvas.getAttribute("width")),
+              Number(drawingCanvas.getAttribute("height"))
+            );
+            result.boxes
+              .filter(function (box) {
+                return box !== result.box;
+              })
+              .forEach(function (box) {
+                Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, {
+                  color: "green",
+                  lineWidth: 2,
+                });
+              });
+          }
+
+          if (result.box) {
+            Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, {
+              color: "#00F",
+              lineWidth: 2,
+            });
+          }
+
+          if (result.codeResult && result.codeResult.code) {
+            Quagga.ImageDebug.drawPath(
+              result.line,
+              { x: "x", y: "y" },
+              drawingCtx,
+              { color: "red", lineWidth: 3 }
+            );
+          }
+        }
+      });
+      Quagga.onDetected(detected);
+    } catch (err) {
+      console.log(err, "error");
+    }
+  }, []);
+
+  const detected = (result) => {
+    setResult(result.codeResult.code);
+    console.log(result.codeResult.code, "result");
+  };
+
   const flashicon = () => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -23,117 +115,101 @@ export default function Camera() {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        width: "100%",
-      }}
+    <Stack
+      direction="column"
+      justifyContent="center"
+      alignItems="center"
+      width="100%"
+      height="100vh"
+      spacing={5}
     >
-      <Stack
-        direction="column"
+      <Item
         sx={{
-          marginTop: "12%",
-          display: "flex",
           justifyContent: "center",
-          width: "100%",
+          fontFamily: "Helvetica",
+          fontSize: "24px",
+          fontStyle: "normal",
+          fontWeight: 700,
+          color: "rgba(63, 170, 114, 1)",
+          marginBottom: "5%",
         }}
       >
-        <Item
-          sx={{
-            justifyContent: "center",
-            fontFamily: "Helvetica",
-            fontSize: "24px",
-            fontStyle: "normal",
-            fontWeight: 700,
+        BeSustainable
+      </Item>
+
+      <Box width="300px" height="450px" id="interactive" className="viewport" />
+
+      <Typography variant="h3" color="black">
+        {result}
+      </Typography>
+
+      <ButtonGroup size="small" variant="text">
+        s
+        <Button
+          style={{
             color: "rgba(63, 170, 114, 1)",
-            marginBottom: "5%",
+            fontFamily: "Helvetica",
           }}
         >
-          BeSustainable
-        </Item>
-        <Box
+          Ingredients
+        </Button>
+        <Button
+          style={{
+            marginRight: "2.5%",
+            color: "rgba(63, 170, 114, 1)",
+            fontFamily: "Helvetica",
+          }}
+        >
+          Scanner
+        </Button>
+        <Button
+          style={{
+            color: "rgba(63, 170, 114, 1)",
+            fontFamily: "Helvetica",
+          }}
+        >
+          Upload
+        </Button>
+      </ButtonGroup>
+      <Stack direction="row" sx={{ justifyContent: "center" }}>
+        <Stack
+          direction="row"
           sx={{
-            marginLeft: "11%",
-            width: "300px",
-            height: "450px",
-            flexShrink: "0",
             justifyContent: "center",
-            backgroundColor: "gray",
+            marginTop: "10%",
+            position: "relative",
           }}
         >
-          camera LOL
-        </Box>
-
-        <ButtonGroup
-          size="small"
-          variant="text"
-          sx={{ marginLeft: "12.5%", marginTop: "5%", width: "100%" }}
-        >
           <Button
             style={{
+              borderRadius: "90%",
+              width: "50px",
+              height: "70px",
+              padding: "10px",
               color: "rgba(63, 170, 114, 1)",
               fontFamily: "Helvetica",
-            }}
-          >
-            Ingredients
-          </Button>
-          <Button
-            style={{
-              marginRight: "2.5%",
-              color: "rgba(63, 170, 114, 1)",
-              fontFamily: "Helvetica",
-            }}
-          >
-            Scanner
-          </Button>
-          <Button
-            style={{
-              color: "rgba(63, 170, 114, 1)",
-              fontFamily: "Helvetica",
-            }}
-          >
-            Upload
-          </Button>
-        </ButtonGroup>
-        <Stack direction="row" sx={{ justifyContent: "center" }}>
-          <Stack
-            direction="row"
-            sx={{
-              justifyContent: "center",
-              marginTop: "10%",
               position: "relative",
+              zIndex: 5, // increased from 1
             }}
           >
-            <Button
-              style={{
-                borderRadius: "90%",
-                width: "50px",
-                height: "70px",
-                padding: "10px",
-                color: "rgba(63, 170, 114, 1)",
-                fontFamily: "Helvetica",
-                position: "relative",
-                zIndex: 5, // increased from 1
-              }}
-            >
-              <CircleIcon style={{ fontSize: "65px" }} />
-            </Button>
-            <PanoramaFishEyeIcon
-              style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                color: "rgba(63, 170, 114, 1)",
+            <CircleIcon style={{ fontSize: "65px" }} />
+          </Button>
+          <PanoramaFishEyeIcon
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              color: "rgba(63, 170, 114, 1)",
 
-                transform: "translate(-50%, -50%)",
-                fontSize: "95px",
-                zIndex: 1, // decreased from 2
-              }}
-            />
-          </Stack>
+              transform: "translate(-50%, -50%)",
+              fontSize: "95px",
+              zIndex: 1, // decreased from 2
+            }}
+          />
         </Stack>
       </Stack>
-    </Box>
+    </Stack>
   );
-}
+};
+
+export default ScannerCamera;
