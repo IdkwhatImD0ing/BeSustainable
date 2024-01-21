@@ -2,10 +2,10 @@ const mongoose = require('mongoose')
 const {v4: uuidv4} = require('uuid')
 
 const userSchema = new mongoose.Schema({
-    _id: {
-        type: String,
-        default: uuidv4,
-    },
+  _id: {
+    type: String,
+    default: uuidv4,
+  },
   scores: {
     type: [Number],
     default: [0, 0, 0, 0, 0, 0, 0],
@@ -41,6 +41,6 @@ userSchema.pre('save', async function(next) {
     next();
 });*/
 
-const User = mongoose.model('User', userSchema)
+const User = mongoose.models.User || mongoose.model('User', userSchema)
 
 module.exports = User

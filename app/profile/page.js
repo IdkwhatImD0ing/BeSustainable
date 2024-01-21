@@ -1,11 +1,11 @@
-import styles from "./profile.module.css";
-import RootLayout from "../layout";
-import { Stack } from "@mui/material";
-import Circle from "@mui/icons-material/Circle";
-import Box from "@mui/material/Box";
-import Item from "@mui/material/ListItem";
-import CircleIcon from "@mui/icons-material/Circle";
-import Image from "next/image";
+import styles from './profile.module.css'
+import RootLayout from '../layout'
+import {Stack} from '@mui/material'
+import Circle from '@mui/icons-material/Circle'
+import Box from '@mui/material/Box'
+import Item from '@mui/material/ListItem'
+import CircleIcon from '@mui/icons-material/Circle'
+import Image from 'next/image'
 
 import {
   LineChart,
@@ -15,42 +15,42 @@ import {
   YAxis,
   Tooltip,
   Legend,
-} from "@material-ui/lab";
+} from '@material-ui/lab'
 
 export default function Profile() {
   return (
-    <Box sx={{ justifyContent: "center" }}>
+    <Box sx={{justifyContent: 'center'}}>
       <Stack direction="column">
-        <Stack direction="row" sx={{ marginTop: "16%" }}>
+        <Stack direction="row" sx={{marginTop: '16%'}}>
           <Item>
             <CircleIcon
               sx={{
-                marginLeft: "10%",
-                color: "gray",
-                width: "110%",
-                height: "80%",
+                marginLeft: '10%',
+                color: 'gray',
+                width: '110%',
+                height: '80%',
               }}
             ></CircleIcon>
           </Item>
           <Stack
             spacing={-2}
             direction="column"
-            sx={{ marginRight: "40%", marginTop: "8%" }}
+            sx={{marginRight: '40%', marginTop: '8%'}}
           >
             <Item
               sx={{
-                color: "gray",
-                marginRight: "10%",
-                fontFamily: "Helvetica",
+                color: 'gray',
+                marginRight: '10%',
+                fontFamily: 'Helvetica',
               }}
             >
               #12345
             </Item>
             <Item
               sx={{
-                color: "gray",
-                marginRight: "10%",
-                fontFamily: "Helvetica",
+                color: 'gray',
+                marginRight: '10%',
+                fontFamily: 'Helvetica',
               }}
             >
               UserName
@@ -59,26 +59,26 @@ export default function Profile() {
         </Stack>
         <Item
           sx={{
-            marginLeft: "8%",
-            color: "rgba(63, 170, 114, 1)",
-            fontFamily: "Helvetica",
-            fontSize: "24px",
-            marginBottom: "8%",
+            marginLeft: '8%',
+            color: 'rgba(63, 170, 114, 1)',
+            fontFamily: 'Helvetica',
+            fontSize: '24px',
+            marginBottom: '8%',
           }}
         >
           Way to Go Green
         </Item>
         <Box
           sx={{
-            marginLeft: "11%",
-            width: "308px",
-            height: "273px",
-            flexSrink: "0",
-            justifyContent: "center",
-            backgroundColor: " gray",
+            marginLeft: '11%',
+            width: '308px',
+            height: '273px',
+            flexSrink: '0',
+            justifyContent: 'center',
+            backgroundColor: ' gray',
           }}
         >
-          <Item sx={{ color: "black" }}>Add Chart</Item>
+          <Item sx={{color: 'black'}}>Add Chart</Item>
           {/* <Stack direction="column">
             <Stack direction="row">
               <Item>
@@ -98,26 +98,26 @@ export default function Profile() {
       <Stack
         direction="row"
         sx={{
-          justifyContent: "center",
-          marginTop: "10%",
-          position: "relative",
+          justifyContent: 'center',
+          marginTop: '10%',
+          position: 'relative',
         }}
       >
-        <Item sx={{ marginLeft: "10%" }}>
+        <Item sx={{marginLeft: '10%'}}>
           <img
             src="/woman.png"
             style={{
-              position: "absolute",
-              top: "-10px", // Adjust these values to position the image
-              left: "110px",
-              width: "290px",
-              height: "230px",
-              zIndex: "4",
+              position: 'absolute',
+              top: '-10px', // Adjust these values to position the image
+              left: '110px',
+              width: '290px',
+              height: '230px',
+              zIndex: '4',
             }}
             alt="Woman"
           />
         </Item>
-        <Item sx={{ width: "100%", marginTop: "5.3%", marginRight: " 20%" }}>
+        <Item sx={{width: '100%', marginTop: '5.3%', marginRight: ' 20%'}}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="390"
@@ -133,5 +133,5 @@ export default function Profile() {
         </Item>
       </Stack>
     </Box>
-  );
+  )
 }

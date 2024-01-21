@@ -3,7 +3,7 @@ import BottomNavigation from '@mui/material/BottomNavigation'
 import BottomNavigationAction from '@mui/material/BottomNavigationAction'
 import HomeIcon from '@mui/icons-material/Home'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
-import { AccountCircle,PhotoCamera} from '@mui/icons-material'
+import {AccountCircle, PhotoCamera} from '@mui/icons-material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import styles from './BottomNavbar.module.css'
 
@@ -17,32 +17,32 @@ const BottomNav = () => {
       // }}
       sx={{}}
       style={{
-        position: "fixed",
+        position: 'fixed',
         bottom: 0,
-        width: "100%",
-        marginBottom: "4%",
+        width: '100%',
+        marginBottom: '4%',
       }}
       color="rgba(96, 143, 69, 1)"
     >
-      <Link href="/">
+      <Link href="/home">
         <BottomNavigationAction
-          style={{ margin: "0 20px" }}
+          style={{margin: '0 20px'}}
           label="Home"
-          icon={<HomeIcon style={{ color: "rgba(96, 143, 69, 1)" }} />}
+          icon={<HomeIcon style={{color: 'rgba(96, 143, 69, 1)'}} />}
         />
       </Link>
       <Link href="/camera">
         <BottomNavigationAction
-          style={{ margin: "0 20px" }}
+          style={{margin: '0 20px'}}
           label="Camera"
-          icon={<PhotoCamera style={{ color: "rgba(96, 143, 69, 1)" }} />}
+          icon={<PhotoCamera style={{color: 'rgba(96, 143, 69, 1)'}} />}
         />
       </Link>
       <Link href="/profile">
         <BottomNavigationAction
-          style={{ margin: "0 20px" }}
+          style={{margin: '0 20px'}}
           label="Profile"
-          icon={<AccountCircleIcon style={{ color: "rgba(96, 143, 69, 1)" }} />}
+          icon={<AccountCircleIcon style={{color: 'rgba(96, 143, 69, 1)'}} />}
         />
       </Link>
     </BottomNavigation>
@@ -68,7 +68,7 @@ const BottomNav = () => {
     //     </Link>
     //   </nav>
     // </BottomNavigation>
-  );
-};
+  )
+}
 
 export default BottomNav
