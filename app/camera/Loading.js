@@ -1,26 +1,26 @@
-import { Stack } from "@mui/material";
-import Item from "@mui/material/ListItem";
+import {Stack} from '@mui/material'
+import Item from '@mui/material/ListItem'
 
 const Loading = () => {
   return (
     <Stack
       direction="column"
       sx={{
-        position: "relative",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        position: 'relative',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       <Item
         sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "25%", // Adjust this value to move the Stack down
-          width: "100%", // Make the Item the width of the screen
-          margin: "auto", // Center the Item
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '25%', // Adjust this value to move the Stack down
+          width: '100%', // Make the Item the width of the screen
+          margin: 'auto', // Center the Item
         }}
       >
         <svg
@@ -50,11 +50,11 @@ const Loading = () => {
       </Item>
       <Item
         sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "-22px",
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '-22px',
         }}
       >
         <svg
@@ -72,47 +72,47 @@ const Loading = () => {
       </Item>
       <Item
         sx={{
-          marginLeft: "10%",
-          fontFamily: "Helvetica",
-          fontSize: "24px",
-          fontWeight: "400",
-          color: "rgba(63, 170, 114, 1)",
-          marginTop: "20%",
+          marginLeft: '10%',
+          fontFamily: 'Helvetica',
+          fontSize: '24px',
+          fontWeight: '400',
+          color: 'rgba(63, 170, 114, 1)',
+          marginTop: '20%',
         }}
       >
         Hello lovely human,
       </Item>
       <Item
         sx={{
-          marginLeft: "10%",
-          fontFamily: "Helvetica",
-          fontSize: "32px",
-          fontWeight: "700",
-          color: "rgba(63, 170, 114, 1)",
+          marginLeft: '10%',
+          fontFamily: 'Helvetica',
+          fontSize: '32px',
+          fontWeight: '700',
+          color: 'rgba(63, 170, 114, 1)',
         }}
       >
         Every bite counts.
       </Item>
       <Item
         sx={{
-          marginLeft: "10%",
-          fontFamily: "Helvetica",
-          fontSize: "32px",
-          fontWeight: "700",
-          color: "rgba(63, 170, 114, 1)",
-          marginTop: "-14px",
+          marginLeft: '10%',
+          fontFamily: 'Helvetica',
+          fontSize: '32px',
+          fontWeight: '700',
+          color: 'rgba(63, 170, 114, 1)',
+          marginTop: '-14px',
         }}
       >
-        So let's make it
+        So let&apos;s make it
       </Item>
       <Item
         sx={{
-          marginLeft: "10%",
-          fontFamily: "Helvetica",
-          fontSize: "32px",
-          fontWeight: "700",
-          color: "rgba(63, 170, 114, 1)",
-          marginTop: "-14px",
+          marginLeft: '10%',
+          fontFamily: 'Helvetica',
+          fontSize: '32px',
+          fontWeight: '700',
+          color: 'rgba(63, 170, 114, 1)',
+          marginTop: '-14px',
         }}
       >
         sustainable.
@@ -121,35 +121,35 @@ const Loading = () => {
       <img
         src="/bag.png"
         style={{
-          marginTop: "20%",
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
-          top: "0", // Adjust these values to position the image
+          marginTop: '20%',
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          top: '0', // Adjust these values to position the image
 
-          width: "181px",
-          height: "181px",
-          zIndex: "1",
+          width: '181px',
+          height: '181px',
+          zIndex: '1',
         }}
         alt="bag"
       ></img>
       <Item
         sx={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
 
-          alignItems: "center",
-          color: "rgba(63, 170, 114, 1)",
-          fontWeight: "700",
-          fontSize: "20px",
-          fontFamily: "Helvetica",
+          alignItems: 'center',
+          color: 'rgba(63, 170, 114, 1)',
+          fontWeight: '700',
+          fontSize: '20px',
+          fontFamily: 'Helvetica',
         }}
       >
         Please wait for you results to load...
       </Item>
     </Stack>
-  );
-};
+  )
+}
 
-export default Loading;
+export default Loading
