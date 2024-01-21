@@ -20,7 +20,7 @@
     "@mui/material": "^5.15.5",
     "@mui/material-next": "^6.0.0-alpha.118",
     "@typegoose/typegoose": "^12.1.0",
-    "@zxing/browser": "^0.1.4",
+    "@zxing/library": "^0.20.0",
     "axios": "^1.6.5",
     "dotenv": "^16.3.2",
     "google-gax": "^4.1.0",
@@ -28,7 +28,6 @@
     "mongoose": "^8.1.0",
     "next": "14.1.0",
     "openai": "^4.24.7",
-    "quagga": "^0.12.1",
     "react": "^18",
     "react-dom": "^18"
   },
