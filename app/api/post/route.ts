@@ -29,6 +29,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+
     // Parse the request body
     const body = await request.json();
     const { userId, imageLink, caption } = body;

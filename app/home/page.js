@@ -13,15 +13,21 @@ export default function Home() {
   useEffect(() => {
     console.log('user', user)
     if (!user) return
-    console.log('fetching posts')
-
-    fetch('/api/posts?userId=' + user.sid).then((response) => {
-      console.log('response', response)
-      response.json().then((data) => {
-        console.log('data', data)
-        setPosts(data)
+    const fetchData = async () => {
+      await fetch('/api/user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({userId: user.sid}),
       })
-    })
+
+      const data = await fetch('/api/post?userId=' + user.sid)
+      const posts = await data.json()
+      setPosts(posts)
+    }
+
+    fetchData()
   }, [user])
 
   const icon = () => {
