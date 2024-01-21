@@ -24,10 +24,11 @@ async function getUserById(userId) {
   }
 }
 
-async function updateScore(id, day, increase) {
+async function updateScore(id, increase) {
   try {
     // Find the user by ID
     const user = await User.findById(id)
+    const day = new Date().getDay()
 
     // Check if the user exists
     if (!user) {
