@@ -1,12 +1,11 @@
-const User = require("../models/userModel.js")
+const User = require("../models/userModel.js");
 
 async function createUser(username, email, password) {
   try {
-
     const newUser = new User({
-      username : username,
-      email : email,
-      password : password,
+      username: username,
+      email: email,
+      password: password,
     });
 
     console.log("HERE");
@@ -24,10 +23,10 @@ async function createUser(username, email, password) {
 
 async function getUserByEmail(email) {
   try {
-    const user = await User.findOne({email : email});
+    const user = await User.findOne({ email: email });
     return user;
   } catch (error) {
-    consoler.error('Error finding user by email: ', error);
+    consoler.error("Error finding user by email: ", error);
     throw error;
   }
 }
@@ -39,13 +38,13 @@ async function updateScore(id, day, increase) {
 
     // Check if the user exists
     if (!user) {
-      throw new Error('User not found');
+      throw new Error("User not found");
     }
 
     // Check if the day is valid (assuming scores array has 7 elements for 7
     // days)
     if (day < 0 || day >= user.scores.length) {
-      throw new Error('Invalid day index');
+      throw new Error("Invalid day index");
     }
 
     // Increase the score for the specified day
@@ -66,5 +65,5 @@ async function updateScore(id, day, increase) {
 module.exports = {
   createUser,
   getUserByEmail,
-  updateScore
-}
+  updateScore,
+};
