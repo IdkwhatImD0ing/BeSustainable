@@ -1,11 +1,12 @@
 require('dotenv').config({ path: './.env.local' });
 
+const { getStepConnectorUtilityClass } = require('@mui/material');
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const clientPromise = require('./lib/mongodb');
 const { createPost, getPosts } = require('./lib/post-db');
-const { createUser, getUserById, getUserByEmail, updateScore } = require('./lib/user-db'); // Adjust paths as necessary
+const { createUser, getUserByEmail, updateScore, getScores } = require('./lib/user-db'); // Adjust paths as necessary
 
 async function testCRUD() {
     try {
@@ -35,6 +36,8 @@ async function testCRUD() {
 
       const score = await updateScore(fetchedByEmail._id, 5, 10);
       console.log("Updated Score", score);
+
+  
       
 
       

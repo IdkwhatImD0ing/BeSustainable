@@ -65,6 +65,7 @@ async function updateScore(id, day, increase) {
 
 
 
+
 module.exports = {
     createUser,
     getUserByEmail,
