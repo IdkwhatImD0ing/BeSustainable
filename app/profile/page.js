@@ -3,7 +3,7 @@
 import {useState, useEffect} from 'react'
 import {Avatar, Stack, Typography} from '@mui/material'
 import Box from '@mui/material/Box'
-import Item from '@mui/material/ListItem'
+import Image from 'next/image'
 
 import {useUser} from '@auth0/nextjs-auth0/client'
 import LineChartComponent from './LineChart'
@@ -33,7 +33,17 @@ export default function Profile() {
       paddingTop="15%"
       spacing={3}
     >
-      <Typography variant="h2" color="black">
+      <Typography
+        variant="h2"
+        sx={{
+          justifyContent: 'center',
+          fontFamily: 'Helvetica',
+          fontSize: '30px',
+          fontStyle: 'normal',
+          fontWeight: 700,
+          color: 'rgba(63, 170, 114, 1)',
+        }}
+      >
         Profile
       </Typography>
       <Stack
@@ -49,17 +59,9 @@ export default function Profile() {
           sx={{width: '100px', height: '100px'}}
         />
 
-        <Stack direction="column" sx={{marginTop: '8%'}}>
-          <Item
-            sx={{
-              color: 'gray',
-              marginRight: '10%',
-              fontFamily: 'Helvetica',
-            }}
-          >
-            #12345
-          </Item>
-          <Item
+        <Stack direction="column">
+          <Typography
+            variant="h5"
             sx={{
               color: 'gray',
               marginRight: '10%',
@@ -67,7 +69,16 @@ export default function Profile() {
             }}
           >
             {user ? user.name : ''}
-          </Item>
+          </Typography>
+          <Typography
+            sx={{
+              color: 'gray',
+              marginRight: '10%',
+              fontFamily: 'Helvetica',
+            }}
+          >
+            #12345
+          </Typography>
         </Stack>
       </Stack>
       <Typography>Way to Go Green</Typography>
@@ -78,35 +89,19 @@ export default function Profile() {
         }}
       >
         {scores && <LineChartComponent data={scores} />}
-
-        {/* <Stack direction="column">
-            <Stack direction="row">
-              <Item>
-                <LineChart width={400} height={400} data={data}>
-                  <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-                  <CartesianGrid stroke="#ccc" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                </LineChart>
-              </Item>
-            </Stack>
-          </Stack> */}
       </Box>
 
       <Stack width="100%" direction="row" position="fixed" bottom="0" right="0">
-        <img
-          src="/woman.png"
+        <Image
+          src="/woman.png" // Relative path to your image file
+          alt="Woman"
+          layout="fill" // This allows the image to fill the parent container
+          objectFit="contain" // This can be 'contain', 'cover', etc. depending on how you want the image to fit
+          objectPosition="110px bottom" // Positions the image at the bottom and 110px from the left
           style={{
             position: 'absolute',
-            left: '110px',
-            width: '290px',
-            height: '230px',
-            bottom: '0',
             zIndex: '4',
           }}
-          alt="Woman"
         />
 
         <svg

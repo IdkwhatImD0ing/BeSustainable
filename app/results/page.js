@@ -1,8 +1,7 @@
 'use client'
 
 import {Stack, Button, Box, Typography} from '@mui/material'
-import Item from '@mui/material/ListItem'
-import {LinearProgress} from '@mui/material'
+import Image from 'next/image'
 import {useState, useEffect} from 'react'
 import {useRouter} from 'next/navigation'
 import {useUser} from '@auth0/nextjs-auth0/client'
@@ -45,12 +44,26 @@ export default function Results() {
       direction="column"
       width="100%"
       height="100vh"
-      justifyContent="center"
+      justifyContent="flex-start"
       alignItems="center"
       spacing={3}
-      paddingTop="10%"
+      paddingTop="20%"
+      overflow="hidden"
+      paddingX="10%"
     >
-      <Typography variant="h3">Results</Typography>
+      <Typography
+        variant="h2"
+        sx={{
+          justifyContent: 'center',
+          fontFamily: 'Helvetica',
+          fontSize: '30px',
+          fontStyle: 'normal',
+          fontWeight: 700,
+          color: 'rgba(63, 170, 114, 1)',
+        }}
+      >
+        Results
+      </Typography>
       <Box
         sx={{
           position: 'relative',
@@ -101,12 +114,12 @@ export default function Results() {
         </svg>
       </Box>
 
-      <img
-        src={image}
-        style={{
-          height: '300px',
-          width: '450px',
-        }}
+      <Image
+        src={image} // Dynamic source, ensure it's a valid path or URL
+        alt="Result" // Always provide an alt attribute for accessibility
+        width={450} // Width of the image in pixels
+        height={300} // Height of the image in pixels
+        layout="fixed" // This will keep the dimensions you provided
       />
 
       <Typography

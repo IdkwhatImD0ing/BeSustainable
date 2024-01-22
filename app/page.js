@@ -1,7 +1,9 @@
+'use client'
+import {useRouter} from 'next/navigation'
 import {Stack, Button, Box, Typography} from '@mui/material'
-import Item from '@mui/material/ListItem'
 
 export default function Landing() {
+  const router = useRouter()
   return (
     <Stack
       direction="column"
@@ -113,6 +115,9 @@ export default function Landing() {
         choices one step at a time.
       </Typography>
       <Button
+        onClick={() => {
+          router.push('/api/auth/login')
+        }}
         sx={{
           color: 'rgba(26, 28, 28, 0.5)',
           zIndex: 'auto', // Change this to "auto"

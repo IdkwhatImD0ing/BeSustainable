@@ -2,7 +2,7 @@
 
 import {useState, useEffect} from 'react'
 import {Box, Stack, Typography} from '@mui/material'
-import Item from '@mui/material/ListItem'
+import Image from 'next/image'
 import PostBlock from '../components/PostBlock'
 import {useUser} from '@auth0/nextjs-auth0/client'
 
@@ -50,11 +50,13 @@ export default function Home() {
     <Stack
       direction="column"
       width="100%"
+      height="100vh"
       justifyContent="flex-start"
       alignItems="flex-start"
-      marginTop="20%"
+      paddingTop="20%"
       paddingX="10%"
       spacing={2}
+      overflow="hidden"
     >
       <Box position="absolute" top="50px" left="50px">
         <svg
@@ -128,18 +130,23 @@ export default function Home() {
         {user ? user.name : ''}
       </Typography>
 
-      <img
-        src="/cart.png"
+      <div
         style={{
           position: 'absolute',
-
-          width: '221px',
-          height: '166px',
+          right: '0',
           zIndex: '1',
-          right: '-10%',
+          width: '221px', // Ensure the container has the same dimensions as the image
+          height: '166px',
         }}
-        alt="Cart"
-      />
+      >
+        <Image
+          src="/cart.png" // Relative path to your image file
+          alt="Cart"
+          width={221} // Width of the image in pixels
+          height={166} // Height of the image in pixels
+          layout="fixed" // This will keep the dimensions you provided
+        />
+      </div>
 
       <Typography
         sx={{
@@ -158,6 +165,7 @@ export default function Home() {
         spacing={3}
         justifyContent="flex-start"
         alignItems="center"
+        overflow="scroll"
       >
         {posts.map((post, index) => (
           <PostBlock
@@ -168,7 +176,16 @@ export default function Home() {
         ))}
       </Stack>
 
-      <Box position="absolute" bottom="-40%" left="0" width="100%" zIndex={-10}>
+      <Box
+        height="100%"
+        position="absolute"
+        left="0"
+        top="0"
+        paddingTop="40%"
+        width="100%"
+        zIndex={-10}
+        overflow="hidden"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="100%"

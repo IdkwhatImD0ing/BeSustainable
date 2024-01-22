@@ -15,9 +15,14 @@ const ScannerCamera = () => {
 
   const videoRef = useRef()
 
-  const startVideoStream = async (videoElementRef) => {
+  const startVideoStream = async (videoElementRef, useBackCamera = true) => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({video: true})
+      const constraints = {
+        video: {
+          facingMode: useBackCamera ? 'environment' : 'user', // 'environment' for back camera, 'user' for front
+        },
+      }
+      const stream = await navigator.mediaDevices.getUserMedia(constraints)
       videoElementRef.current.srcObject = stream
       videoElementRef.current.play()
     } catch (error) {
@@ -160,6 +165,7 @@ const ScannerCamera = () => {
       height="100vh"
       spacing={5}
       paddingTop="20%"
+      overflow="hidden"
     >
       <Typography
         variant="h2"
@@ -211,10 +217,10 @@ const ScannerCamera = () => {
         >
           <Button
             style={{
-              color: 'rgba(63, 170, 114, 1)',
+              color: mode === 'ingredients' ? 'white' : 'rgba(63, 170, 114, 1)',
+              backgroundColor:
+                mode === 'ingredients' ? 'rgba(63, 170, 114, 1)' : '',
               fontFamily: 'Helvetica',
-              marginRight: '2.5%',
-              marginLeft: '-6.5%',
             }}
             onClick={handleIngredientsClick}
           >
@@ -222,9 +228,10 @@ const ScannerCamera = () => {
           </Button>
           <Button
             style={{
-              color: 'rgba(63, 170, 114, 1)',
+              color: mode === 'scanner' ? 'white' : 'rgba(63, 170, 114, 1)',
+              backgroundColor:
+                mode === 'scanner' ? 'rgba(63, 170, 114, 1)' : '',
               fontFamily: 'Helvetica',
-              margin: 'auto',
             }}
             onClick={handleScannerClick}
           >
@@ -232,15 +239,16 @@ const ScannerCamera = () => {
           </Button>
           <Button
             style={{
-              color: 'rgba(63, 170, 114, 1)',
+              color: mode === 'upload' ? 'white' : 'rgba(63, 170, 114, 1)',
+              backgroundColor: mode === 'upload' ? 'rgba(63, 170, 114, 1)' : '',
               fontFamily: 'Helvetica',
-              marginLeft: '3.5%',
             }}
             onClick={handleUploadClick}
           >
             Upload
           </Button>
         </ButtonGroup>
+
         <Stack direction="row" sx={{justifyContent: 'center'}}>
           <Stack
             direction="row"
@@ -250,20 +258,31 @@ const ScannerCamera = () => {
             }}
           >
             <Button
+              disabled={mode === 'scanner'}
               style={{
                 borderRadius: '90%',
                 width: '50px',
                 height: '70px',
                 padding: '10px',
-                color: 'rgba(63, 170, 114, 1)',
+                color:
+                  mode === 'scanner'
+                    ? 'rgba(63, 170, 114, 0.5)'
+                    : 'rgba(63, 170, 114, 1)', // Fade color when disabled
+                backgroundColor:
+                  mode === 'scanner' ? 'rgba(255, 255, 255, 0.5)' : '', // Optional: Fade background as well
                 fontFamily: 'Helvetica',
                 position: 'relative',
                 zIndex: 5, // increased from 1
+                // Apply opacity reduction if the button is disabled
+                opacity: mode === 'scanner' ? 0.5 : 1,
+                // Optionally, you could add a cursor style
+                cursor: mode === 'scanner' ? 'not-allowed' : 'pointer',
               }}
               onClick={handleCircleClick}
             >
               <CircleIcon style={{fontSize: '65px'}} />
             </Button>
+
             <PanoramaFishEyeIcon
               style={{
                 position: 'absolute',

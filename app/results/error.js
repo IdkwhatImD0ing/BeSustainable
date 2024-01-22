@@ -1,9 +1,9 @@
-
 'use client'
 
 import {Stack} from '@mui/material'
 import Item from '@mui/material/ListItem'
 import Button from '@mui/material/Button'
+import Image from 'next/image'
 
 export default function Error() {
   return (
@@ -114,16 +114,16 @@ export default function Error() {
           alignItems: 'center',
         }}
       >
-        <img
-          src="/plate.png"
+        <Image
+          src="/plate.png" // Relative path to your image file
+          alt="Plate"
+          width={152} // Width of the image in pixels
+          height={180} // Height of the image in pixels
+          layout="fixed" // This will keep the dimensions you provided
           style={{
             position: 'absolute',
-
-            width: '152px',
-            height: '180px',
             zIndex: '1',
           }}
-          alt="Plate"
         />
       </Item>
       <Button
