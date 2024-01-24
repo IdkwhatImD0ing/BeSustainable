@@ -1,9 +1,7 @@
 import './globals.css'
 import {UserProvider} from '@auth0/nextjs-auth0/client'
-import {Inter} from 'next/font/google'
-
-import BottomNav from './components/BottomNavbar.js'
-const inter = Inter({subsets: ['latin']})
+import BottomNav from './BottomNavbar'
+import Logout from './Logout'
 
 export const viewport = {
   themeColor: '#000000',
@@ -44,6 +42,7 @@ export default function RootLayout({children}) {
     <UserProvider>
       <html lang="en">
         <body>
+          <Logout />
           <BottomNav />
           {children}
         </body>

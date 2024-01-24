@@ -159,13 +159,13 @@ const ScannerCamera = () => {
   return (
     <Stack
       direction="column"
-      justifyContent="flex-start"
+      justifyContent="center"
       alignItems="center"
       width="100%"
       height="100vh"
       spacing={5}
-      paddingTop="20%"
       overflow="hidden"
+      backgroundColor="white"
     >
       <Typography
         variant="h2"
