@@ -1,7 +1,7 @@
 import './globals.css'
 import {UserProvider} from '@auth0/nextjs-auth0/client'
 import BottomNav from './BottomNavbar'
-import Logout from './Logout'
+import Logout from './logout'
 
 export const viewport = {
   themeColor: '#000000',
